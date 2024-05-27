@@ -1,0 +1,14 @@
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5; /* Cor de fundo do footer */
+    height: 5rem; /* Altura desejada do footer */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo{
+    width: 10rem;
+}

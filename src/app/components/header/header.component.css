@@ -1,0 +1,45 @@
+header {
+    max-height: 8rem;
+}
+
+.logo {
+    margin-left: 2rem;
+}
+
+.logo-animation {
+    animation-name: moveFromLeft;
+    animation-duration: 0.6s;
+    animation-timing-function: ease;
+}
+
+@keyframes moveFromLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.imgLogo {
+    width: 7rem;
+}
+
+.navBarLinks {
+    justify-content: flex-end;
+}
+
+nav li {
+    margin-left: 0.5rem;
+    transition: background-color 0.3s ease, border-radius 0.3s ease; /* Adiciona uma transição suave */
+}
+
+nav li:hover {
+    color: #ffffff;
+    background-color: var(--red);
+    border-radius: 5px; /* Adiciona uma borda arredondada */
+}
+
+nav a:hover{
+    color: #ffffff;
+}
