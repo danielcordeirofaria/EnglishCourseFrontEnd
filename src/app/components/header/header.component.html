@@ -1,33 +1,43 @@
-<header class="pulsating-background ">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a href="../../../index.html" class="logo logo-animation">
-            <img src="../../../assets/images/WhatsApp_Image_2024-04-02_at_9.05.34_PM-removebg-preview-e1712694324680.png" alt="" class="imgLogo">
-        </a>
+<header class="pulsating-background">
+  <nav class="navbar navbar-expand-lg navbar-light">
+      <a href="../../../index.html" class="logo logo-animation">
+          <img src="../../../assets/images/lyricsLogo.png" alt="" class="imgLogo">
+      </a>
 
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse navBarLinks" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#servicos">Alunos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#carouselExampleCaptions">Professores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contatos">Horário</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contatos">Financeiro</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+      <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse navBarLinks" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Alunos
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" routerLink="/consultar-alunos">Consultar Alunos</a>
+                    <a class="dropdown-item" routerLink="/alterar-cadastro">Alterar Cadastro</a>
+                    <a class="dropdown-item" routerLink="/cadastrar-aluno">Cadastrar Novo Aluno</a>
+                  </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/servicos">Serviços</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/carouselExampleCaptions">Professores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/contatos">Horário</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/financeiro">Financeiro</a>
+              </li>
+            </ul>
+          </div>
+      </div>
+  </nav>
 </header>

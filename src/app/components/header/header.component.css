@@ -1,5 +1,7 @@
 header {
     max-height: 8rem;
+    background-color: var(--yellow);
+
 }
 
 .logo {
@@ -43,3 +45,4 @@ nav li:hover {
 nav a:hover{
     color: #ffffff;
 }
+
