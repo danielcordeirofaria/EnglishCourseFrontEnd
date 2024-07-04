@@ -6,8 +6,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AlunosComponent } from './components/alunos/alunos.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AlunosCadastroComponent } from './components/alunos-cadastro/alunos-cadastro.component';
+import { CpfFormatDirective } from './cpf-format.directive';
+import { ConsultarAlunosComponent } from './components/consultar-alunos/consultar-alunos.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     MainComponent,
     FooterComponent,
-    AlunosComponent
+    AlunosComponent,
+    AlunosCadastroComponent,
+    CpfFormatDirective,
+    ConsultarAlunosComponent
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -25,6 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule
+    
 
   ]
 })

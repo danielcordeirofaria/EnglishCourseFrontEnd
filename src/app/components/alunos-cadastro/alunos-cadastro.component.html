@@ -1,0 +1,163 @@
+<form [formGroup]="alunoForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="nome">Nome:</label>
+    <input id="nome" formControlName="nome">
+    <div *ngIf="alunoForm.get('nome')?.invalid && (alunoForm.get('nome')?.dirty || alunoForm.get('nome')?.touched)">
+      <small class="error-message" *ngIf="alunoForm.get('nome')?.errors?.['required']">Nome é obrigatório.</small>
+    </div>
+  </div>
+
+  <div formGroupName="endereco" class="form-group endereco">
+    <div class="cepLogradouro">
+      <div class="form-group cep">
+        <label for="cep">CEP:</label>
+        <input id="cep" formControlName="cep" (blur)="buscarCep(alunoForm.get('endereco.cep')?.value)">
+        <div
+          *ngIf="alunoForm.get('endereco.cep')?.invalid && (alunoForm.get('endereco.cep')?.dirty || alunoForm.get('endereco.cep')?.touched)">
+          <small class="error-message" *ngIf="alunoForm.get('endereco.cep')?.errors?.['required']">CEP é
+            obrigatório.</small>
+          <small class="error-message" *ngIf="alunoForm.get('endereco.cep')?.errors?.['pattern']">CEP inválido.</small>
+        </div>
+      </div>
+      <div class="form-group logradouro">
+        <label for="logradouro">Logradouro:</label>
+        <input id="logradouro" formControlName="logradouro">
+      </div>
+    </div>
+    <div class="numeroComplemento">
+      <div class="form-group">
+        <label for="numero">Número:</label>
+        <input id="numero" formControlName="numero">
+      </div>
+
+      <div class="form-group complemento">
+        <label for="complemento">Complemento:</label>
+        <input id="complemento" formControlName="complemento">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="bairro">Bairro:</label>
+      <input id="bairro" formControlName="bairro">
+    </div>
+
+    <div class="form-group">
+      <label for="cidade">Cidade:</label>
+      <input id="cidade" formControlName="cidade">
+    </div>
+
+    <div class="form-group">
+      <label for="estado">Estado:</label>
+      <input id="estado" formControlName="estado">
+    </div>
+  </div>
+  <div class="dataCpf">
+    <div class="form-group nascimento">
+      <label for="dataDeNascimento">Data de Nascimento:</label>
+      <input id="dataDeNascimento" type="date" formControlName="dataDeNascimento">
+      <div
+        *ngIf="alunoForm.get('dataDeNascimento')?.invalid && (alunoForm.get('dataDeNascimento')?.dirty || alunoForm.get('dataDeNascimento')?.touched)">
+        <small class="error-message" *ngIf="alunoForm.get('dataDeNascimento')?.errors?.['required']">Data de Nascimento
+          é
+          obrigatória.</small>
+      </div>
+    </div>
+
+    <div class="form-group cpf">
+      <label for="cpf">CPF:</label>
+      <input id="cpf" formControlName="cpf" appCpfFormat>
+      <div *ngIf="alunoForm.get('cpf')?.invalid && (alunoForm.get('cpf')?.dirty || alunoForm.get('cpf')?.touched)">
+        <small class="error-message" *ngIf="alunoForm.get('cpf')?.errors?.['required']">CPF é obrigatório.</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email">
+    <div *ngIf="alunoForm.get('email')?.invalid && (alunoForm.get('email')?.dirty || alunoForm.get('email')?.touched)">
+      <small class="error-message" *ngIf="alunoForm.get('email')?.errors?.['required']">Email é obrigatório.</small>
+      <small class="error-message" *ngIf="alunoForm.get('email')?.errors?.['email']">Formato de email inválido.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="formacao">Formação:</label>
+    <select id="formacao" formControlName="formacao">
+      <option value="">Selecione a formação</option>
+      <option value="N/A">N/A</option>
+      <option value="ensino_fundamental_incompleto">Ensino Fundamental Incompleto</option>
+      <option value="ensino_fundamental_completo">Ensino Fundamental Completo</option>
+      <option value="ensino_medio_incompleto">Ensino Médio Incompleto</option>
+      <option value="ensino_medio_completo">Ensino Médio Completo</option>
+      <option value="ensino_superior_incompleto">Ensino Superior Incompleto</option>
+      <option value="ensino_superior_completo">Ensino Superior Completo</option>
+      <option value="pos_graduacao">Pós-graduação</option>
+      <!-- Adicione mais opções conforme necessário -->
+    </select>
+    <div
+      *ngIf="alunoForm.get('formacao')?.invalid && (alunoForm.get('formacao')?.dirty || alunoForm.get('formacao')?.touched)">
+      <small class="error-message" *ngIf="alunoForm.get('formacao')?.errors?.['required']">Formação é
+        obrigatória.</small>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="profissao">Profissão:</label>
+    <input id="profissao" formControlName="profissao">
+  </div>
+
+  <!-- <div class="form-group">
+    <label for="moduloMatriculado">Módulo Matriculado:</label>
+    <input id="moduloMatriculado" formControlName="moduloMatriculado">
+  </div> -->
+
+  <div class="form-group">
+    <label for="moduloFeito">Módulo Feito:</label>
+    <input id="moduloFeito" formControlName="moduloFeito">
+    <div
+      *ngIf="alunoForm.get('moduloFeito')?.invalid && (alunoForm.get('moduloFeito')?.dirty || alunoForm.get('moduloFeito')?.touched)">
+      <small class="error-message" *ngIf="alunoForm.get('moduloFeito')?.errors?.['required']">Módulo Feito é
+        obrigatório.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="nivel">Nível:</label>
+    <select id="nivel" formControlName="nivel">
+      <option value="">Selecione o nível</option>
+      <option value="beginers_1">Beginers 1</option>
+      <option value="beginers_2">Beginers 2</option>
+      <option value="elementary_1">Elementary 1</option>
+      <option value="elementary_2">Elementary_2</option>
+      <option value="pre_intermediate_1">Pre Intermediate 1</option>
+      <option value="pre_intermediate_2">Pre Intermediate 2</option>
+      <option value="pre_intermediate_plus_1">Pre Intermediate Plus 1</option>
+      <option value="pre_intermediate_plus_2">Pre Intermediate Plus 2</option>
+      <option value="intermediate_1">Intermediate 1</option>
+      <option value="intermediate_2">Intermediate 2</option>
+      <option value="pre_advanced_1">Pre Advanced 1</option>
+      <option value="pre_advanced_2">Pre Advanced 2</option>
+      <option value="advanced_1">Advanced 1</option>
+      <option value="advanced_2">Advanced 2</option>
+      <option value="advanced_plus_1">Advanced Plus 1</option>
+      <option value="advanced_plus_2">Advanced Plus 2</option>
+    </select>
+    <div *ngIf="alunoForm.get('nivel')?.invalid && (alunoForm.get('nivel')?.dirty || alunoForm.get('nivel')?.touched)">
+      <small class="error-message" *ngIf="alunoForm.get('nivel')?.errors?.['required']">Nível é obrigatório.</small>
+    </div>
+  </div>
+  
+  
+
+  <!-- Cadatrar turma do aluno: -->
+  <!-- <div class="turma">
+    <label for="turma">Turma:</label>
+  </div> -->
+
+
+  <button type="submit" [disabled]="loading">Cadastrar</button>
+</form>
+
+<div *ngIf="loading" class="loading-spinner">
+  Carregando...
+</div>

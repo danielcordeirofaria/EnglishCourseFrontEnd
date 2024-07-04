@@ -46,3 +46,14 @@ nav a:hover{
     color: #ffffff;
 }
 
+.dropdown-item:hover{
+    background-color: var(--red);
+}
+
+.dropdown-menu{
+    padding: 0;
+}
+
+.dropdown-item{
+    padding: 0.75rem;
+}

@@ -1,0 +1,53 @@
+<h1>Consultar Alunos</h1>
+
+<div class="listaAlunos">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="th">Nome</th>
+                <th class="th">ID</th>
+                <th class="th">Idade</th>
+                <th class="th">Data de Nascimento</th>
+                <th class="th">Nível</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let aluno of alunos; let i = index">
+                <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}">
+                    <td class="td"><a routerLink="/detalhesAluno">{{ aluno.nome }}</a></td>
+                    <td class="td centralizandoTextoTabela">{{ aluno.idAlunoMatricula }}</td>
+                    <td class="td centralizandoTextoTabela">{{ calcularIdade(aluno.dataDeNascimento) }}</td>
+                    <td class="td centralizandoTextoTabela">{{ aluno.dataDeNascimento | date:'dd/MM/yyyy' }}</td>
+                    <td class="td centralizandoTextoTabela">{{ aluno.nivel }}</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal para exibir detalhes do aluno -->
+<div *ngIf="alunoSelecionado" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="fecharDetalhesAluno()">&times;</span>
+        <h3>Detalhes do Aluno</h3>
+        <p><strong>Nome:</strong> {{ alunoSelecionado.nome }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ alunoSelecionado.dataDeNascimento | date:'dd/MM/yyyy' }}</p>
+        <p><strong>CPF:</strong> {{ alunoSelecionado.cpf }}</p>
+        <p><strong>Email:</strong> {{ alunoSelecionado.email }}</p>
+        <p><strong>Formação:</strong> {{ alunoSelecionado.formacao }}</p>
+        <p><strong>Profissão:</strong> {{ alunoSelecionado.profissao }}</p>
+        <p><strong>Módulo Feito:</strong> {{ alunoSelecionado.moduloFeito }}</p>
+        <p><strong>Nível:</strong> {{ alunoSelecionado.nivel }}</p>
+
+        <!-- Formulário para atualizar dados do aluno -->
+        <form (submit)="atualizarAluno()">
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" [(ngModel)]="alunoSelecionado.nome" required>
+            </div>
+            <!-- Adicione mais campos conforme necessário -->
+
+            <button type="submit">Atualizar Aluno</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex: 1;
+}
+
+h1 {
+    font-size: 2rem;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.listaAlunos {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.th,
+.td {
+    padding: 10px;
+    text-align: left;
+}
+
+.th {
+    background-color: #f2f2f2;
+}
+
+.td {
+    border: 1px solid #ddd;
+}
+
+.row-even td{
+    background-color: #f9f9f9;
+}
+
+.row-odd td{
+    background-color: var(--almost-white);
+}
+
+.centralizandoTextoTabela{
+    text-align: center;
+}
