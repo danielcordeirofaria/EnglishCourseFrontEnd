@@ -80,3 +80,8 @@ form{
   flex-direction: row;
 
 }
+
+.custom-select option:hover{
+  background-color: var(--red);
+
+}

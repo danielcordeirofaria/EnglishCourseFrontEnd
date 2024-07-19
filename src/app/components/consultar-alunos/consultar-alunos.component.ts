@@ -10,6 +10,7 @@ import { AlunosService } from '../../services/alunos.service';
 export class ConsultarAlunosComponent implements OnInit {
   alunos: Aluno[] = [];
   alunoSelecionado: Aluno | undefined;
+  router: any;
 
   constructor(private alunosService: AlunosService) { }
 
@@ -29,37 +30,25 @@ export class ConsultarAlunosComponent implements OnInit {
       );
   }
 
-  abrirDetalhesAluno(id: number): void {
-    this.alunosService.buscarAlunoPorId(id)
-      .subscribe(
-        (aluno: Aluno) => {
-          this.alunoSelecionado = aluno;
-        },
-        (error: any) => {
-          console.error('Erro ao buscar aluno por ID', error);
-        }
-      );
-  }
-
-  fecharDetalhesAluno(): void {
-    this.alunoSelecionado = undefined;
-  }
-
-  atualizarAluno(): void {
-    if (this.alunoSelecionado && this.alunoSelecionado.idAlunoMatricula) {
-      this.alunosService.atualizarAluno(this.alunoSelecionado.idAlunoMatricula, this.alunoSelecionado)
+  abrirDetalhesAluno(event: MouseEvent): void {
+    const idAlunoMatricula = (event.currentTarget as HTMLAnchorElement).getAttribute('data-aluno-id');
+    if (idAlunoMatricula) {
+      const idAlunoInt = parseInt(idAlunoMatricula, 10);
+      this.alunosService.buscarAlunoPorId(idAlunoInt)
         .subscribe(
-          (response: any) => {
-            console.log('Aluno atualizado com sucesso', response);
-            this.fecharDetalhesAluno();
+          (aluno: Aluno) => {
+            this.alunoSelecionado = aluno;
+            this.router.navigate(['/alunos', idAlunoInt]); // Redireciona para a rota /alunos/idAlunoInt
           },
           (error: any) => {
-            console.error('Erro ao atualizar aluno', error);
+            console.error('Erro ao buscar aluno por ID', error);
           }
         );
+    } else {
+      console.error('ID do aluno não encontrado');
     }
   }
-
+  
   calcularIdade(dataDeNascimento: string): number {
     const hoje = new Date();
     const nascimento = new Date(dataDeNascimento);
@@ -70,4 +59,6 @@ export class ConsultarAlunosComponent implements OnInit {
     }
     return idade;
   }
+
+
 }

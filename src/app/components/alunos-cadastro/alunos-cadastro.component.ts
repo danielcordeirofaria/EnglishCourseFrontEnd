@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CepService } from '../../services/cep.service';
 import { AlunosService } from '../../services/alunos.service';
+import { ProfessorService } from '../../services/professor.service';  // Importa o serviço de professores
 import { Aluno } from '../../models/aluno';
 import { Endereco } from '../../models/endereco';
 import { Router } from '@angular/router';
+import { Professor } from '../../models/professor';
 
 @Component({
   selector: 'app-alunos-cadastro',
@@ -14,16 +16,26 @@ import { Router } from '@angular/router';
 export class AlunosCadastroComponent implements OnInit {
   public alunoForm!: FormGroup;
   public loading: boolean = false;
+  professores: Professor[] = [];  // Tipo correto para professores
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private service: AlunosService,
-    private cepService: CepService
+    private alunoService: AlunosService,
+    private cepService: CepService,
+    private professorService: ProfessorService  // Injeção do serviço de professores
   ) { }
 
   ngOnInit(): void {
     this.createForm();
+    this.loadProfessores();
+  }
+
+  loadProfessores() {
+    this.professorService.listarProfessor().subscribe(
+      (data: Professor[]) => this.professores = data,
+      (error: any) => console.error('Erro ao carregar professores:', error)
+    );
   }
 
   createForm() {
@@ -46,6 +58,7 @@ export class AlunosCadastroComponent implements OnInit {
       moduloMatriculado: ['', Validators.required],
       moduloFeito: ['', Validators.required],
       nivel: ['', Validators.required],
+      professor: ['', Validators.required]
     });
   }
 
@@ -91,9 +104,10 @@ export class AlunosCadastroComponent implements OnInit {
         formValue.formacao,
         formValue.profissao,
         formValue.moduloFeito,
-        formValue.nivel
+        formValue.nivel,
+        formValue.professor
       );
-      this.service.cadastrarAluno(novoAluno).subscribe({
+      this.alunoService.cadastrarAluno(novoAluno).subscribe({
         next: (res: any) => {
           this.loading = false;
           if (res && res.message) {

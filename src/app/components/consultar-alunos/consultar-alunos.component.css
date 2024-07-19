@@ -31,6 +31,7 @@ h1 {
 
 .th {
     background-color: #f2f2f2;
+    font-weight: 600;
 }
 
 .td {
@@ -47,4 +48,13 @@ h1 {
 
 .centralizandoTextoTabela{
     text-align: center;
+}
+
+.linha-tabela td {
+    transition: background-color 0.25s ease;
+}
+
+.linha-tabela:hover td {
+    background-color: var(--red);
+    color: white;
 }

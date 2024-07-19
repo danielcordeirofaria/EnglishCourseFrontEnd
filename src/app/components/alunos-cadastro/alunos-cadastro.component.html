@@ -113,10 +113,27 @@
 
   <div class="form-group">
     <label for="moduloFeito">Módulo Feito:</label>
-    <input id="moduloFeito" formControlName="moduloFeito">
-    <div
-      *ngIf="alunoForm.get('moduloFeito')?.invalid && (alunoForm.get('moduloFeito')?.dirty || alunoForm.get('moduloFeito')?.touched)">
-      <small class="error-message" *ngIf="alunoForm.get('moduloFeito')?.errors?.['required']">Módulo Feito é
+    <select id="nivel" formControlName="nivel">
+      <option value="">Selecione o Módulo feito</option>
+      <option value="beginners_1">Beginners 1</option>
+      <option value="beginners_2">Beginners 2</option>
+      <option value="elementary_1">Elementary 1</option>
+      <option value="elementary_2">Elementary_2</option>
+      <option value="pre_intermediate_1">Pre Intermediate 1</option>
+      <option value="pre_intermediate_2">Pre Intermediate 2</option>
+      <option value="pre_intermediate_plus_1">Pre Intermediate Plus 1</option>
+      <option value="pre_intermediate_plus_2">Pre Intermediate Plus 2</option>
+      <option value="intermediate_1">Intermediate 1</option>
+      <option value="intermediate_2">Intermediate 2</option>
+      <option value="pre_advanced_1">Pre Advanced 1</option>
+      <option value="pre_advanced_2">Pre Advanced 2</option>
+      <option value="advanced_1">Advanced 1</option>
+      <option value="advanced_2">Advanced 2</option>
+      <option value="advanced_plus_1">Advanced Plus 1</option>
+      <option value="advanced_plus_2">Advanced Plus 2</option>
+    </select>
+    <div *ngIf="alunoForm.get('nivel')?.invalid && (alunoForm.get('nivel')?.dirty || alunoForm.get('nivel')?.touched)">
+      <small class="error-message" *ngIf="alunoForm.get('nivel')?.errors?.['required']">Módulo feito é
         obrigatório.</small>
     </div>
   </div>
@@ -146,8 +163,20 @@
       <small class="error-message" *ngIf="alunoForm.get('nivel')?.errors?.['required']">Nível é obrigatório.</small>
     </div>
   </div>
-  
-  
+  <!-- src/app/components/consultar-alunos/consultar-alunos.component.html -->
+  <div class="form-group">
+    <label for="professor">Professor:</label>
+    <select id="professor" formControlName="professor" class="custom-select">
+      <option *ngFor="let professor of professores" [value]="professor.idProfessor">
+        {{ professor.nomeProfessor }}
+      </option>
+    </select>
+    <div *ngIf="alunoForm.get('professor')?.invalid && (alunoForm.get('professor')?.dirty || alunoForm.get('professor')?.touched)">
+      <small class="error-message" *ngIf="alunoForm.get('professor')?.errors?.['required']">Professor é obrigatório.</small>
+    </div>
+  </div>
+
+
 
   <!-- Cadatrar turma do aluno: -->
   <!-- <div class="turma">

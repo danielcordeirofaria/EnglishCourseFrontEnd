@@ -11,6 +11,7 @@ export class Aluno {
   profissao: string;
   moduloFeito: string;
   nivel: string;
+  professor: number;
 
   constructor(
     nome: string,
@@ -21,7 +22,8 @@ export class Aluno {
     formacao: string,
     profissao: string,
     moduloFeito: string,
-    nivel: string
+    nivel: string,
+    professor: number
   ) {
     this.nome = nome;
     this.endereco = endereco;
@@ -32,5 +34,6 @@ export class Aluno {
     this.profissao = profissao;
     this.moduloFeito = moduloFeito;
     this.nivel = nivel;
+    this.professor = professor
   }
 }

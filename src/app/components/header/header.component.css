@@ -48,6 +48,7 @@ nav a:hover{
 
 .dropdown-item:hover{
     background-color: var(--red);
+    border-radius: 5px;
 }
 
 .dropdown-menu{

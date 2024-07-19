@@ -9,7 +9,7 @@ import { ConsultarAlunosComponent } from './components/consultar-alunos/consulta
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'main', component: MainComponent },
-  { path: 'alunos', component: AlunosComponent },
+  { path: 'alunos/:id', component: AlunosComponent },
   { path: 'alunos-cadastros', component: AlunosCadastroComponent},
   { path: 'consulta-alunos', component: ConsultarAlunosComponent}
   // Adicione outras rotas conforme necessário
