@@ -1,0 +1,33 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex: 1;
+}
+
+h1{
+    font-size: 2rem;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.titulo{
+    font-weight: 600;
+
+}
+
+.detalhe, .endereco-item, .endereco{
+
+    margin-bottom: 0.5rem;
+}
+
+.detalhe{
+    display: flex;
+}
+
+section{
+    margin-bottom: 0.5rem;
+
+}

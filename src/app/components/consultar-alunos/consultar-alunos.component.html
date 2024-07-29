@@ -12,13 +12,10 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let aluno of alunos; let i = index">
-                <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela">
-                    <td class="td">
-                        <a (click)="abrirDetalhesAluno($event)" [attr.data-aluno-id]="aluno.idAlunoMatricula">
-                            {{ aluno.nome }}
-                        </a>
-                    </td>
+            <ng-container *ngFor="let aluno of sortedAlunos; let i = index">
+                <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela"
+                    [routerLink]="['/alunos-detalhes', aluno.idAlunoMatricula]" style="cursor: pointer;">
+                    <td class="td"> {{ aluno.nome }} </td>
                     <td class="td centralizandoTextoTabela">{{ aluno.idAlunoMatricula }}</td>
                     <td class="td centralizandoTextoTabela">{{ calcularIdade(aluno.dataDeNascimento) }}</td>
                     <td class="td centralizandoTextoTabela">{{ aluno.dataDeNascimento | date:'dd/MM/yyyy' }}</td>

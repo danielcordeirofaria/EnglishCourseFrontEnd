@@ -5,12 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AlunosComponent } from './components/alunos/alunos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlunosCadastroComponent } from './components/alunos-cadastro/alunos-cadastro.component';
 import { CpfFormatDirective } from './cpf-format.directive';
 import { ConsultarAlunosComponent } from './components/consultar-alunos/consultar-alunos.component';
+import { AlunoDetalhesComponent } from './components/aluno-detalhes/aluno-detalhes.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,10 @@ import { ConsultarAlunosComponent } from './components/consultar-alunos/consulta
     HeaderComponent,
     MainComponent,
     FooterComponent,
-    AlunosComponent,
     AlunosCadastroComponent,
     CpfFormatDirective,
-    ConsultarAlunosComponent
+    ConsultarAlunosComponent,
+    AlunoDetalhesComponent
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -31,8 +32,8 @@ import { ConsultarAlunosComponent } from './components/consultar-alunos/consulta
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
+    CommonModule 
 
   ]
 })

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
-import { AlunosComponent } from './components/alunos/alunos.component';
 import { AlunosCadastroComponent } from './components/alunos-cadastro/alunos-cadastro.component';
 import { ConsultarAlunosComponent } from './components/consultar-alunos/consultar-alunos.component';
+import { AlunoDetalhesComponent } from './components/aluno-detalhes/aluno-detalhes.component';
 // Adicione outros componentes conforme necessário
 
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'main', component: MainComponent },
-  { path: 'alunos/:id', component: AlunosComponent },
+  { path: 'alunos-detalhes/:id', component: AlunoDetalhesComponent },
   { path: 'alunos-cadastros', component: AlunosCadastroComponent},
   { path: 'consulta-alunos', component: ConsultarAlunosComponent}
   // Adicione outras rotas conforme necessário
