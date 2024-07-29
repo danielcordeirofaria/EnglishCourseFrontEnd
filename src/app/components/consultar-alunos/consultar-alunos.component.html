@@ -1,27 +1,78 @@
 <h1>Consultar Alunos</h1>
 
+<div>
+
+  <select [(ngModel)]="filterColumn" class="selectFiltro">
+    <option value="nome">Nome</option>
+    <option value="idAlunoMatricula">ID</option>
+    <option value="nivel">Nível</option>
+    <option value="dataDeNascimento">Data de Nascimento</option>
+  </select>
+  
+  <select [(ngModel)]="filterMonth" *ngIf="filterColumn === 'dataDeNascimento'" class="selectFiltro">
+    <option value="">Todos os Meses</option>
+    <option value="01">Janeiro</option>
+    <option value="02">Fevereiro</option>
+    <option value="03">Março</option>
+    <option value="04">Abril</option>
+    <option value="05">Maio</option>
+    <option value="06">Junho</option>
+    <option value="07">Julho</option>
+    <option value="08">Agosto</option>
+    <option value="09">Setembro</option>
+    <option value="10">Outubro</option>
+    <option value="11">Novembro</option>
+    <option value="12">Dezembro</option>
+  </select>
+    <input type="text" [(ngModel)]="filterValue" placeholder="Pesquisar alunos" *ngIf="filterColumn !== 'dataDeNascimento'" class="selectFiltro">
+
+  <input type="number" [(ngModel)]="filterYear" placeholder="Ano de Nascimento" *ngIf="filterColumn === 'dataDeNascimento'" class="selectFiltro">
+  
+  <button (click)="filtrarAlunos()">Filtrar</button>
+</div>
+
 <div class="listaAlunos">
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="th">Nome</th>
-                <th class="th centralizandoTextoTabela">ID</th>
-                <th class="th centralizandoTextoTabela">Idade</th>
-                <th class="th centralizandoTextoTabela">Data de Nascimento</th>
-                <th class="th centralizandoTextoTabela">Nível</th>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let aluno of sortedAlunos; let i = index">
-                <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela"
-                    [routerLink]="['/alunos-detalhes', aluno.idAlunoMatricula]" style="cursor: pointer;">
-                    <td class="td"> {{ aluno.nome }} </td>
-                    <td class="td centralizandoTextoTabela">{{ aluno.idAlunoMatricula }}</td>
-                    <td class="td centralizandoTextoTabela">{{ calcularIdade(aluno.dataDeNascimento) }}</td>
-                    <td class="td centralizandoTextoTabela">{{ aluno.dataDeNascimento | date:'dd/MM/yyyy' }}</td>
-                    <td class="td centralizandoTextoTabela">{{ aluno.nivel }}</td>
-                </tr>
-            </ng-container>
-        </tbody>
-    </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="th" (click)="ordenandoLista('nome')">Nome
+          <fa-icon *ngIf="sortColumn === 'nome' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
+          <fa-icon *ngIf="sortColumn === 'nome' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
+        </th>
+        <th class="th centralizandoTextoTabela" (click)="ordenandoLista('idAlunoMatricula')">ID
+          <fa-icon *ngIf="sortColumn === 'idAlunoMatricula' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
+          <fa-icon *ngIf="sortColumn === 'idAlunoMatricula' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
+        </th>
+        <th class="th centralizandoTextoTabela" (click)="ordenandoLista('idade')">Idade
+          <fa-icon *ngIf="sortColumn === 'idade' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
+          <fa-icon *ngIf="sortColumn === 'idade' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
+        </th>
+        <th class="th centralizandoTextoTabela" (click)="ordenandoLista('dataDeNascimento')">Data de Nascimento
+          <fa-icon *ngIf="sortColumn === 'dataDeNascimento' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
+          <fa-icon *ngIf="sortColumn === 'dataDeNascimento' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
+        </th>
+        <th class="th centralizandoTextoTabela" (click)="ordenandoLista('nivel')">Nível
+          <fa-icon *ngIf="sortColumn === 'nivel' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
+          <fa-icon *ngIf="sortColumn === 'nivel' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
+        </th>
+        <th class="th centralizandoTextoTabela" (click)="ordenandoLista('anoDeNascimento')">Ano de Nascimento
+          <fa-icon *ngIf="sortColumn === 'anoDeNascimento' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
+          <fa-icon *ngIf="sortColumn === 'anoDeNascimento' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let aluno of sortedAlunos; let i = index">
+        <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela"
+            [routerLink]="['/alunos-detalhes', aluno.idAlunoMatricula]" style="cursor: pointer;">
+          <td class="td">{{ aluno.nome }}</td>
+          <td class="td centralizandoTextoTabela">{{ aluno.idAlunoMatricula }}</td>
+          <td class="td centralizandoTextoTabela">{{ calcularIdade(aluno.dataDeNascimento) }}</td>
+          <td class="td centralizandoTextoTabela">{{ aluno.dataDeNascimento | date:'dd/MM/yyyy' }}</td>
+          <td class="td centralizandoTextoTabela">{{ aluno.nivel }}</td>
+          <td class="td centralizandoTextoTabela">{{ aluno.dataDeNascimento | date:'yyyy' }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
 </div>

@@ -12,6 +12,7 @@ import { CpfFormatDirective } from './cpf-format.directive';
 import { ConsultarAlunosComponent } from './components/consultar-alunos/consultar-alunos.component';
 import { AlunoDetalhesComponent } from './components/aluno-detalhes/aluno-detalhes.component';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -28,5 +29,6 @@ import { CommonModule } from '@angular/common';
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
+        FontAwesomeModule,
         CommonModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

@@ -58,3 +58,14 @@ h1 {
     background-color: var(--red);
     color: white;
 }
+
+.selectFiltro:focus{
+    border: 3px solid var(--red);
+    outline: none; 
+    box-shadow: none; 
+  }
+
+.selectFiltro{
+    margin: 1rem;
+
+}
