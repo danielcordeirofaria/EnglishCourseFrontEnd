@@ -6,28 +6,80 @@
     flex: 1;
 }
 
-h1{
+h1 {
     font-size: 2rem;
     padding: 1rem;
     width: 100%;
     text-align: center;
 }
 
-.titulo{
+section {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin: 0.5rem 0;
+}
+
+strong {
     font-weight: 600;
-
 }
 
-.detalhe, .endereco-item, .endereco{
-
-    margin-bottom: 0.5rem;
+.endereco {
+    margin-bottom: 1rem;
 }
 
-.detalhe{
-    display: flex;
+.endereco p, .endereco label {
+    margin: 0.5rem 0;
 }
 
-section{
-    margin-bottom: 0.5rem;
+.input-container {
+    margin-bottom: 1rem;
+}
 
+input {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+input[type="date"] {
+    padding: 0.5rem;
+}
+
+.button-container {
+    margin: 1.5rem;
+}
+
+.button-voltar, .button-editar, .button-salvar, .button-cancelar {
+    background-color: var(--red); /* Cor de fundo do botão */
+    color: #ffffff; /* Cor do texto */
+    border: none; /* Remove borda padrão */
+    border-radius: 5px; /* Arredondamento das bordas */
+    padding: 0.75rem 1.5rem; /* Espaçamento interno */
+    font-size: 1rem; /* Tamanho da fonte */
+    font-weight: 600; /* Peso da fonte */
+    cursor: pointer; /* Cursor em forma de mão ao passar sobre o botão */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave para cor e transformação */
+    margin: 0 0.5rem; /* Margem entre botões */
+}
+
+.button-voltar:hover, .button-editar:hover, .button-salvar:hover, .button-cancelar:hover {
+    background-color: var(--yellow); /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Leve aumento do botão ao passar o mouse */
+}
+
+.button-voltar:focus, .button-editar:focus, .button-salvar:focus, .button-cancelar:focus {
+    outline: none; /* Remove a borda de foco padrão */
+    box-shadow: 0 0 0 2px var(--yellow); /* Adiciona uma sombra de foco para acessibilidade */
 }

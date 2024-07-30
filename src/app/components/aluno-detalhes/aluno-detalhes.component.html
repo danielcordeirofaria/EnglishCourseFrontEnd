@@ -1,59 +1,102 @@
 <h1>Detalhes do Aluno</h1>
 
-<section class="detalhesAluno" *ngIf="aluno">
-  <div class="detalhe">
-    <p class="titulo">Nome:</p>
-    <p>&nbsp;{{ aluno.nome }}</p>
-  </div>
-  <div class="detalhe">
-    <p class="titulo">ID:</p>
-    <p>&nbsp; {{ aluno.idAlunoMatricula }}</p>
-  </div>
-  <div class="detalhe">
-    <p class="titulo">Idade: </p>
-    <p>&nbsp; {{ calcularIdade(aluno.dataDeNascimento) }}</p>
-  </div>
-  <div class="detalhe">
-    <p class="titulo">Data de Nascimento:</p>
-    <p>&nbsp; {{ aluno.dataDeNascimento | date:'dd/MM/yyyy' }}</p>
-  </div>
-  <div class="detalhe">
-    <p class="titulo">Nível:</p>
-    <p>&nbsp; {{ aluno.nivel }}</p>
+<div *ngIf="aluno">
+  <div *ngIf="!modoEdicao">
+    <section class="detalhes">
+      <p><strong>Nome:</strong> {{ aluno.nome }}</p>
+      <p><strong>CPF:</strong> {{ aluno.cpf }}</p>
+      <p><strong>Email:</strong> {{ aluno.email }}</p>
+      
+      <p><strong>Endereço:</strong></p>
+      <div class="endereco">
+        <p><strong>Logradouro:</strong> {{ aluno.endereco.logradouro }}</p>
+        <p><strong>Número:</strong> {{ aluno.endereco.numero }}</p>
+        <p><strong>Bairro:</strong> {{ aluno.endereco.bairro }}</p>
+        <p><strong>Cidade:</strong> {{ aluno.endereco.cidade }}</p>
+        <p><strong>Estado:</strong> {{ aluno.endereco.estado }}</p>
+        <p><strong>CEP:</strong> {{ aluno.endereco.cep }}</p>
+      </div>
+
+      <p><strong>Data de Nascimento:</strong> {{ aluno.dataDeNascimento | date:'dd/MM/yyyy' }}</p>
+      <p><strong>Formação:</strong> {{ aluno.formacao }}</p>
+      <p><strong>Profissão:</strong> {{ aluno.profissao }}</p>
+      <p><strong>Módulo Feito:</strong> {{ aluno.moduloFeito }}</p>
+      <p><strong>Nível:</strong> {{ aluno.nivel }}</p>
+
+      <div class="button-container">
+        <button class="button-editar" (click)="editar()">Editar</button>
+        <button class="button-voltar" (click)="voltar()">Voltar</button>
+      </div>
+    </section>
   </div>
 
-  <p class="titulo detalhe">Endereço:</p>
+  <div *ngIf="modoEdicao">
+    <section class="edicao">
+      <label>
+        Nome:
+        <input [(ngModel)]="aluno.nome" />
+      </label>
+      <label>
+        CPF:
+        <input [(ngModel)]="aluno.cpf" />
+      </label>
+      <label>
+        Email:
+        <input [(ngModel)]="aluno.email" />
+      </label>
+      
+      <label>
+        Endereço:
+        <div class="endereco">
+          <label>Logradouro:
+            <input [(ngModel)]="aluno.endereco.logradouro" placeholder="Logradouro" />
+          </label>
+          <label>Número:
+            <input [(ngModel)]="aluno.endereco.numero" placeholder="Número" />
+          </label>
+          <label>Bairro:
+            <input [(ngModel)]="aluno.endereco.bairro" placeholder="Bairro" />
+          </label>
+          <label>Cidade:
+            <input [(ngModel)]="aluno.endereco.cidade" placeholder="Cidade" />
+          </label>
+          <label>Estado:
+            <input [(ngModel)]="aluno.endereco.estado" placeholder="Estado" />
+          </label>
+          <label>CEP:
+            <input [(ngModel)]="aluno.endereco.cep" placeholder="CEP" />
+          </label>
+        </div>
+      </label>
+      <label>
+        Data de Nascimento:
+        <input [(ngModel)]="aluno.dataDeNascimento" type="date" />
+      </label>
+      <label>
+        Formação:
+        <input [(ngModel)]="aluno.formacao" />
+      </label>
+      <label>
+        Profissão:
+        <input [(ngModel)]="aluno.profissao" />
+      </label>
+      <label>
+        Módulo Feito:
+        <input [(ngModel)]="aluno.moduloFeito" />
+      </label>
+      <label>
+        Nível:
+        <input [(ngModel)]="aluno.nivel" />
+      </label>
 
-  <div class="detalhe">
-    <p class="titulo">Logradouro:</p>
-    <p>&nbsp; {{ aluno.endereco?.logradouro }}</p>
+      <div class="button-container">
+        <button class="button-salvar" (click)="salvar()">Salvar</button>
+        <button class="button-cancelar" (click)="cancelar()">Cancelar</button>
+      </div>
+    </section>
   </div>
-  <div class="detalhe">
-    <p class="titulo">Número:</p>
-    <p>&nbsp; {{ aluno.endereco?.numero }}</p>
-  </div>
-  <div class="detalhe">
-    <p class="titulo">Bairro:</p>
-    <p>&nbsp; {{ aluno.endereco?.bairro }}</p>
-  </div>
-  <div class="detalhe">
-    <p class="titulo">Cidade:</p>
-    <p>&nbsp; {{ aluno.endereco?.cidade }}</p>
-  </div>
-  <div class="detalhe">
-    <p class="titulo">Estado:</p>
-    <p>&nbsp; {{ aluno.endereco?.estado }}</p>
-  </div>
-  <div class="detalhe">
-    <p class="titulo">Email:</p>
-    <p>&nbsp; {{ aluno.email }}</p>
-  </div>
-  <!-- Adicione mais detalhes conforme necessário -->
+</div>
 
-</section>
-<button (click)="voltar()">Voltar</button>
-
-<!-- Mensagem caso não haja dados do aluno -->
 <div *ngIf="!aluno">
   <p>Detalhes do aluno não encontrados.</p>
 </div>
