@@ -57,22 +57,22 @@ export class AlunoDetalhesComponent implements OnInit {
     this.modoEdicao = true;
   }
 
-  salvar(): void {
-    if (this.aluno) {
-      const id = this.aluno.idAlunoMatricula!;
-      this.alunosService.atualizarAluno(id, this.aluno).subscribe(
-        (res: any) => {
-          console.log('Aluno salvo com sucesso:', res);
-          this.modoEdicao = false;
-          this.voltar(); // Navega de volta após salvar
-        },
-        (err: any) => {
-          console.error('Erro ao salvar aluno', err);
-        }
-      );
-    }
+salvar(): void {
+  if (this.aluno) {
+    const id = this.aluno.idAlunoMatricula!;
+    this.alunosService.atualizarAluno(id, this.aluno).subscribe(
+      (res: any) => {
+        console.log('Aluno salvo com sucesso:', res);
+        this.modoEdicao = false;
+        this.voltar(); // Navega de volta após salvar
+      },
+      (err: any) => {
+        console.error('Erro ao salvar aluno', err);
+      }
+    );
   }
-  
+}
+
 
 // Função para cancelar a edição
 cancelar(): void {

@@ -83,3 +83,9 @@ input[type="date"] {
     outline: none; /* Remove a borda de foco padrão */
     box-shadow: 0 0 0 2px var(--yellow); /* Adiciona uma sombra de foco para acessibilidade */
 }
+
+input:focus, select:focus {
+    border: 3px solid var(--red);
+    outline: none; 
+    box-shadow: none; 
+}

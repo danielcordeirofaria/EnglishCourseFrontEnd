@@ -1,7 +1,7 @@
-import { Endereco } from './endereco';
+import { Endereco } from "./endereco";
 
 export class Aluno {
-  idAlunoMatricula?: number; // torna o id opcional
+  idAlunoMatricula!: any|string;
   nome: string;
   endereco: Endereco;
   dataDeNascimento: string;
@@ -11,7 +11,8 @@ export class Aluno {
   profissao: string;
   moduloFeito: string;
   nivel: string;
-  professor: number;
+  idProfessor: number; 
+  status: string;
 
   constructor(
     nome: string,
@@ -23,7 +24,8 @@ export class Aluno {
     profissao: string,
     moduloFeito: string,
     nivel: string,
-    professor: number
+    idProfessor: number,
+    status: string
   ) {
     this.nome = nome;
     this.endereco = endereco;
@@ -34,6 +36,7 @@ export class Aluno {
     this.profissao = profissao;
     this.moduloFeito = moduloFeito;
     this.nivel = nivel;
-    this.professor = professor
+    this.idProfessor = idProfessor;
+    this.status = status;
   }
 }

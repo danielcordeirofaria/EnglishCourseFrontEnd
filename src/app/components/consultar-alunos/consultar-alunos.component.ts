@@ -15,7 +15,7 @@ export class ConsultarAlunosComponent implements OnInit {
   sortedAlunos: Aluno[] = [];
   sortDirection: string = 'asc';
   sortColumn: string = 'nome';
-  filterColumn: 'nome' | 'idAlunoMatricula' | 'nivel' | 'dataDeNascimento' = 'nome'; // Coluna padrão para filtro
+  filterColumn: 'status' | 'nome' | 'idAlunoMatricula' | 'nivel' | 'dataDeNascimento' = 'nome'; // Coluna padrão para filtro
   filterValue: any = ''; // Valor de filtro
   filterMonth: string = ''; // Mês de nascimento para filtro
   filterYear: number | '' = ''; // Ano de nascimento para filtro

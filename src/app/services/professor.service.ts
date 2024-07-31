@@ -13,7 +13,7 @@ export class ProfessorService {
 
   // Método para obter a lista de professores
   listarProfessor(): Observable<Professor[]> {
-    return this.http.get<Professor[]>(`${this.apiUrl}/professor`);
+    return this.http.get<Professor[]>(`${this.apiUrl}/professores`);
   }
   
 }

@@ -22,6 +22,7 @@
       <p><strong>Profissão:</strong> {{ aluno.profissao }}</p>
       <p><strong>Módulo Feito:</strong> {{ aluno.moduloFeito }}</p>
       <p><strong>Nível:</strong> {{ aluno.nivel }}</p>
+      <p><strong>Status:</strong> {{ aluno.status }}</p>
 
       <div class="button-container">
         <button class="button-editar" (click)="editar()">Editar</button>
@@ -38,7 +39,7 @@
       </label>
       <label>
         CPF:
-        <input [(ngModel)]="aluno.cpf" />
+        <input [(ngModel)]="aluno.cpf" appCpfFormat />
       </label>
       <label>
         Email:
@@ -87,6 +88,13 @@
       <label>
         Nível:
         <input [(ngModel)]="aluno.nivel" />
+      </label>
+      <label>
+        Status:
+        <select [(ngModel)]="aluno.status">
+          <option value="ATIVADO">ATIVADO</option>
+          <option value="DESATIVADO">DESATIVADO</option>
+        </select>
       </label>
 
       <div class="button-container">

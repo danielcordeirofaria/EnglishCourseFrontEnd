@@ -12,7 +12,7 @@ export class AlunosService {
   constructor(private http: HttpClient) { }
 
   cadastrarAluno(aluno: Aluno): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}`, aluno);
+    return this.http.post<any>(this.apiUrl, aluno);
   }
 
   // Método para listar nomes dos alunos

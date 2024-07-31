@@ -55,13 +55,13 @@ export class AlunosCadastroComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       formacao: ['', Validators.required],
       profissao: ['', Validators.required],
-      moduloMatriculado: ['', Validators.required],
       moduloFeito: ['', Validators.required],
       nivel: ['', Validators.required],
-      professor: ['', Validators.required]
+      professor: ['', Validators.required],
+      status: ['', Validators.required]
     });
   }
-
+  
   buscarCep(cep: string) {
     this.cepService.buscarCep(cep).subscribe(
       data => this.populateEndereco(data),
@@ -86,6 +86,10 @@ export class AlunosCadastroComponent implements OnInit {
     if (this.alunoForm.valid) {
       this.loading = true;
       const formValue = this.alunoForm.value;
+  
+      // Log para verificar o valor do formulário
+      console.log('Form Value:', formValue);
+  
       const endereco = new Endereco(
         formValue.endereco.logradouro,
         formValue.endereco.numero,
@@ -95,6 +99,7 @@ export class AlunosCadastroComponent implements OnInit {
         formValue.endereco.cep,
         formValue.endereco.complemento
       );
+  
       const novoAluno = new Aluno(
         formValue.nome,
         endereco,
@@ -105,14 +110,18 @@ export class AlunosCadastroComponent implements OnInit {
         formValue.profissao,
         formValue.moduloFeito,
         formValue.nivel,
-        formValue.professor
+        Number(formValue.professor), // Certifique-se de que aqui é um número
+        formValue.status
       );
+      
+      console.log('Novo Aluno:', novoAluno);
+  
       this.alunoService.cadastrarAluno(novoAluno).subscribe({
         next: (res: any) => {
           this.loading = false;
           if (res && res.message) {
             alert(res.message);
-            this.router.navigate(["/main"]); // Certifique-se de que a rota "main" esteja corretamente configurada
+            this.router.navigate(['/']);
           }
         },
         error: (err: any) => {
@@ -123,4 +132,5 @@ export class AlunosCadastroComponent implements OnInit {
       });
     }
   }
+  
 }
