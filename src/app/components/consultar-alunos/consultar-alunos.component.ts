@@ -15,10 +15,11 @@ export class ConsultarAlunosComponent implements OnInit {
   sortedAlunos: Aluno[] = [];
   sortDirection: string = 'asc';
   sortColumn: string = 'nome';
-  filterColumn: 'status' | 'nome' | 'idAlunoMatricula' | 'nivel' | 'dataDeNascimento' = 'nome'; // Coluna padrão para filtro
+  filterColumn: 'status' | 'nome' | 'idAlunoMatricula' | 'nivel' | 'dataDeNascimento' = 'status'; // Coluna padrão para filtro
   filterValue: any = ''; // Valor de filtro
   filterMonth: string = ''; // Mês de nascimento para filtro
   filterYear: number | '' = ''; // Ano de nascimento para filtro
+  filterStatus: string = ''; // Status do filtro
   faSortUp = faSortUp;
   faSortDown = faSortDown;
 
@@ -87,8 +88,10 @@ export class ConsultarAlunosComponent implements OnInit {
         const anoFiltro = this.filterYear ? this.filterYear : '';
 
         return (mesFiltro === '' || mes === mesFiltro) && (anoFiltro === '' || ano === anoFiltro);
+      } else if (this.filterColumn === 'status') {
+        return this.filterStatus === '' || aluno.status === this.filterStatus;
       } else {
-        const valorColuna = aluno[this.filterColumn];
+        const valorColuna = aluno[this.filterColumn as keyof Aluno];
         if (typeof valorColuna === 'string') {
           return valorColuna.toLowerCase().includes(this.filterValue.toLowerCase());
         }
@@ -99,6 +102,7 @@ export class ConsultarAlunosComponent implements OnInit {
       }
     });
   }
+
   calcularIdade(dataDeNascimento: string): number {
     const hoje = new Date();
     const nascimento = new Date(dataDeNascimento);
