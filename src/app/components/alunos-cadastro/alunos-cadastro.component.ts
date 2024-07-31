@@ -132,5 +132,4 @@ export class AlunosCadastroComponent implements OnInit {
       });
     }
   }
-  
 }

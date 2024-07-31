@@ -166,10 +166,8 @@
   <!-- src/app/components/consultar-alunos/consultar-alunos.component.html -->
   <div class="form-group">
     <label for="professor">Professor:</label>
-    <select id="professor" formControlName="professor" class="custom-select">
-      <option *ngFor="let professor of professores" [value]="professor.idProfessor">
-        {{ professor.nomeProfessor }}
-      </option>
+    <select id="professor" formControlName="professor">
+      <option *ngFor="let professor of professores" [value]="professor.idProfessor">{{ professor.nomeProfessor }}</option>
     </select>
     <div *ngIf="alunoForm.get('professor')?.invalid && (alunoForm.get('professor')?.dirty || alunoForm.get('professor')?.touched)">
       <small class="error-message" *ngIf="alunoForm.get('professor')?.errors?.['required']">Professor é obrigatório.</small>

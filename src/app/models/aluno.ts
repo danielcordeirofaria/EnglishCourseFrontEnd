@@ -1,4 +1,5 @@
 import { Endereco } from "./endereco";
+import { Professor } from "./professor";
 
 export class Aluno {
   idAlunoMatricula!: any|string;
@@ -11,7 +12,7 @@ export class Aluno {
   profissao: string;
   moduloFeito: string;
   nivel: string;
-  idProfessor: number; 
+  professor: { idProfessor: number }; 
   status: string;
 
   constructor(
@@ -36,7 +37,7 @@ export class Aluno {
     this.profissao = profissao;
     this.moduloFeito = moduloFeito;
     this.nivel = nivel;
-    this.idProfessor = idProfessor;
+    this.professor = { idProfessor }; // Ajustado para incluir um objeto professor
     this.status = status;
   }
 }
