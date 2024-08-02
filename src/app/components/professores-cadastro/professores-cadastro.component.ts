@@ -1,10 +1,117 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProfessorService } from '../../services/professor.service';
+import { CepService } from '../../services/cep.service'; // Importe o serviço de CEP
+import { Router } from '@angular/router';
+import { Professor } from '../../models/professor';
+import { Endereco } from '../../models/endereco';
+
 
 @Component({
-  selector: 'app-professores-cadastro',
+  selector: 'app-cadastrar-professor',
   templateUrl: './professores-cadastro.component.html',
-  styleUrl: './professores-cadastro.component.css'
+  styleUrls: ['./professores-cadastro.component.css']
 })
-export class ProfessoresCadastroComponent {
+export class CadastrarProfessorComponent implements OnInit {
+  professorForm!: FormGroup;
+  loading = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private professorService: ProfessorService,
+    private cepService: CepService // Injete o serviço de CEP
+  ) { }
+
+  ngOnInit(): void {
+    this.initializeForm();
+  }
+
+  initializeForm(): void {
+    this.professorForm = this.fb.group({
+      nomeProfessor: ['', Validators.required],
+      cpf: ['', Validators.required],
+      endereco: this.fb.group({
+        logradouro: ['', Validators.required],
+        numero: ['', Validators.required],
+        complemento: [''],
+        bairro: ['', Validators.required],
+        cidade: ['', Validators.required],
+        estado: ['', Validators.required],
+        cep: ['', [Validators.required, Validators.pattern('[0-9]{5}-[0-9]{3}')]],
+      }),
+      email: ['', [Validators.required, Validators.email]],
+      login: ['', Validators.required],
+      password: ['', Validators.required],
+      whatsapp: ['', [Validators.pattern('^[0-9]{10,11}$')]] // Adicione a validação para WhatsApp
+    });
+  }
+
+
+  buscarCep(cep: string) {
+    this.cepService.buscarCep(cep).subscribe(
+      data => this.populateEndereco(data),
+      error => console.error('Erro ao buscar CEP:', error)
+    );
+  }
+
+  populateEndereco(data: any) {
+    if (data) {
+      this.professorForm.patchValue({
+        endereco: {
+          logradouro: data.logradouro || '',
+          bairro: data.bairro || '',
+          cidade: data.localidade || '',
+          estado: data.uf || '',
+        }
+      });
+    }
+  }
+
+  onSubmit(): void {
+    if (this.professorForm.valid) {
+      this.loading = true;
+      const formValue = this.professorForm.value;
+
+      console.log('Form Value:', formValue);
+
+      // Criar instância de Endereco
+      const endereco = new Endereco(
+        formValue.endereco.logradouro,
+        formValue.endereco.numero,
+        formValue.endereco.bairro,
+        formValue.endereco.cidade,
+        formValue.endereco.estado,
+        formValue.endereco.cep,
+        formValue.endereco.complemento // Opcional
+      );
+
+      // Criar instância de Professor
+      const novoProfessor = new Professor(
+        formValue.nomeProfessor,
+        formValue.cpf,
+        endereco,
+        formValue.email,
+        formValue.login,
+        formValue.password,
+        formValue.whatsapp
+      );
+
+      this.professorService.createProfessor(novoProfessor).subscribe({
+        next: (res: any) => {
+          this.loading = false;
+          if (res && res.message) {
+            alert(res.message);
+            this.router.navigate(['/']);
+          }
+        },
+        error: (error: any) => {
+          console.error('Erro ao cadastrar professor', error);
+          alert('Erro ao cadastrar professor: ' + (error.error.message || error.message));
+          this.loading = false;
+        }
+      });
+    }
+  }
 
 }

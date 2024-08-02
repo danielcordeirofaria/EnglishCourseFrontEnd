@@ -13,7 +13,9 @@ import { ConsultarAlunosComponent } from './components/consultar-alunos/consulta
 import { AlunoDetalhesComponent } from './components/aluno-detalhes/aluno-detalhes.component';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ProfessoresCadastroComponent } from './components/professores-cadastro/professores-cadastro.component';
+import { CadastrarProfessorComponent } from './components/professores-cadastro/professores-cadastro.component';
+import { ConsultarProfessoresComponent } from './components/consultar-professores/consultar-professores.component';
+
 
 @NgModule({ declarations: [
         AppComponent,
@@ -25,12 +27,14 @@ import { ProfessoresCadastroComponent } from './components/professores-cadastro/
         CpfFormatDirective,
         ConsultarAlunosComponent,
         AlunoDetalhesComponent,
-        ProfessoresCadastroComponent
+        CadastrarProfessorComponent,
+        ConsultarProfessoresComponent
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    bootstrap: [AppComponent],
+    imports: [BrowserModule,
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
         FontAwesomeModule,
         CommonModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
-export class AppModule { }
+        export class AppModule { }

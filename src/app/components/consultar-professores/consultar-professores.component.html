@@ -1,0 +1,59 @@
+<h1>Consultar Professores</h1>
+
+<div>
+    <select [(ngModel)]="filterColumn" class="selectFiltro">
+        <option value="status">Status</option>
+        <option value="nomeProfessor">Nome</option>
+        <option value="idProfessor">ID</option>
+        <option value="email">Email</option>
+        <option value="whatsapp">WhatsApp</option>
+    </select>
+
+    <select [(ngModel)]="filterStatus" *ngIf="filterColumn === 'status'" class="selectFiltro">
+        <option value="ATIVADO">Ativado</option>
+        <option value="DESATIVADO">Desativado</option>
+        <option value="">Todos os status</option>
+      </select>
+    
+
+      <input type="text" [(ngModel)]="filterValue" placeholder="Pesquisar professores" class="selectFiltro" *ngIf="filterColumn !== 'status'">
+      <button (click)="filtrarProfessores()">Filtrar</button>
+      
+</div>
+
+<div class="listaAlunos">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="th" (click)="ordenandoLista('nomeProfessor')">Nome
+                    <fa-icon *ngIf="sortColumn === 'nomeProfessor' && sortDirection === 'asc'"
+                        [icon]="faSortUp"></fa-icon>
+                    <fa-icon *ngIf="sortColumn === 'nomeProfessor' && sortDirection === 'desc'"
+                        [icon]="faSortDown"></fa-icon>
+                </th>
+                <th class="th centralizandoTextoTabela" (click)="ordenandoLista('idProfessor')">ID
+                    <fa-icon *ngIf="sortColumn === 'idProfessor' && sortDirection === 'asc'"
+                        [icon]="faSortUp"></fa-icon>
+                    <fa-icon *ngIf="sortColumn === 'idProfessor' && sortDirection === 'desc'"
+                        [icon]="faSortDown"></fa-icon>
+                </th>
+                <th class="th centralizandoTextoTabela">Email
+                </th>
+                <th class="th centralizandoTextoTabela">WhatsApp
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let professor of sortedProfessores; let i = index">
+                <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela"
+                    [routerLink]="['/professores-detalhes', professor.idProfessor]" style="cursor: pointer;">
+                    <td class="td">{{ professor.nomeProfessor }}</td>
+                    <td class="td centralizandoTextoTabela">{{ professor.idProfessor }}</td>
+                    <td class="td centralizandoTextoTabela">{{ professor.email }}</td>
+                    <td class="td centralizandoTextoTabela">{{ professor.whatsapp }}</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

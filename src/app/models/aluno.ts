@@ -1,5 +1,4 @@
 import { Endereco } from "./endereco";
-import { Professor } from "./professor";
 
 export class Aluno {
   idAlunoMatricula!: any|string;

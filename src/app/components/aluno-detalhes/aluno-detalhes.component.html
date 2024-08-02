@@ -1,12 +1,12 @@
 <h1>Detalhes do Aluno</h1>
 
-<div *ngIf="aluno">
+<div *ngIf="aluno" class="sectionAluno">
   <div *ngIf="!modoEdicao">
     <section class="detalhes">
       <p><strong>Nome:</strong> {{ aluno.nome }}</p>
       <p><strong>CPF:</strong> {{ aluno.cpf }}</p>
       <p><strong>Email:</strong> {{ aluno.email }}</p>
-      
+
       <p><strong>Endereço:</strong></p>
       <div class="endereco">
         <p><strong>Logradouro:</strong> {{ aluno.endereco.logradouro }}</p>
@@ -33,78 +33,190 @@
 
   <div *ngIf="modoEdicao">
     <section class="edicao">
-      <label>
-        Nome:
-        <input [(ngModel)]="aluno.nome" />
-      </label>
-      <label>
-        CPF:
-        <input [(ngModel)]="aluno.cpf" appCpfFormat />
-      </label>
-      <label>
-        Email:
-        <input [(ngModel)]="aluno.email" />
-      </label>
-      
-      <label>
-        Endereço:
-        <div class="endereco">
-          <label>Logradouro:
-            <input [(ngModel)]="aluno.endereco.logradouro" placeholder="Logradouro" />
-          </label>
-          <label>Número:
-            <input [(ngModel)]="aluno.endereco.numero" placeholder="Número" />
-          </label>
-          <label>Bairro:
-            <input [(ngModel)]="aluno.endereco.bairro" placeholder="Bairro" />
-          </label>
-          <label>Cidade:
-            <input [(ngModel)]="aluno.endereco.cidade" placeholder="Cidade" />
-          </label>
-          <label>Estado:
-            <input [(ngModel)]="aluno.endereco.estado" placeholder="Estado" />
-          </label>
-          <label>CEP:
-            <input [(ngModel)]="aluno.endereco.cep" placeholder="CEP" />
-          </label>
-        </div>
-      </label>
-      <label>
-        Data de Nascimento:
-        <input [(ngModel)]="aluno.dataDeNascimento" type="date" />
-      </label>
-      <label>
-        Formação:
-        <input [(ngModel)]="aluno.formacao" />
-      </label>
-      <label>
-        Profissão:
-        <input [(ngModel)]="aluno.profissao" />
-      </label>
-      <label>
-        Módulo Feito:
-        <input [(ngModel)]="aluno.moduloFeito" />
-      </label>
-      <label>
-        Nível:
-        <input [(ngModel)]="aluno.nivel" />
-      </label>
-      <label>
-        Status:
-        <select [(ngModel)]="aluno.status">
-          <option value="ATIVADO">ATIVADO</option>
-          <option value="DESATIVADO">DESATIVADO</option>
-        </select>
-      </label>
+      <form #form="ngForm" (ngSubmit)="salvar()">
+        <label>
+          Nome:
+          <input [(ngModel)]="aluno.nome" name="nome" required />
+          <div *ngIf="!aluno.nome">
+            <small class="error-message">Nome é obrigatório.</small>
+          </div>
+        </label>
 
-      <div class="button-container">
-        <button class="button-salvar" (click)="salvar()">Salvar</button>
-        <button class="button-cancelar" (click)="cancelar()">Cancelar</button>
-      </div>
+        <label>
+          CPF:
+          <input [(ngModel)]="aluno.cpf" name="cpf" appCpfFormat required />
+          <div *ngIf="!aluno.cpf">
+            <small class="error-message">CPF é obrigatório.</small>
+          </div>
+        </label>
+
+        <label>
+          Email:
+          <input [(ngModel)]="aluno.email" name="email" required />
+          <div *ngIf="!aluno.email">
+            <small class="error-message">Email é obrigatório.</small>
+          </div>
+        </label>
+
+        <label>
+          Endereço:
+          <div class="endereco">
+
+            <label>CEP:
+              <input [(ngModel)]="aluno.endereco.cep" name="cep" placeholder="CEP" required #cep="ngModel"
+                (blur)="buscarCep(aluno.endereco.cep)" />
+              <div *ngIf="cep.invalid && (cep.dirty || cep.touched)">
+                <small class="error-message" *ngIf="cep.errors?.['required']">CEP é obrigatório.</small>
+              </div>
+            </label>
+            <label>Logradouro:
+              <input [(ngModel)]="aluno.endereco.logradouro" name="logradouro" placeholder="Logradouro" required
+                #logradouro="ngModel" />
+              <div *ngIf="logradouro.invalid && (logradouro.dirty || logradouro.touched)">
+                <small class="error-message" *ngIf="logradouro.errors?.['required']">Logradouro é obrigatório.</small>
+              </div>
+            </label>
+
+            <label>Número:
+              <input [(ngModel)]="aluno.endereco.numero" name="numero" placeholder="Número" required
+                #numero="ngModel" />
+              <div *ngIf="numero.invalid && (numero.dirty || numero.touched)">
+                <small class="error-message" *ngIf="numero.errors?.['required']">Número é obrigatório.</small>
+              </div>
+            </label>
+
+            <label>Bairro:
+              <input [(ngModel)]="aluno.endereco.bairro" name="bairro" placeholder="Bairro" required
+                #bairro="ngModel" />
+              <div *ngIf="bairro.invalid && (bairro.dirty || bairro.touched)">
+                <small class="error-message" *ngIf="bairro.errors?.['required']">Bairro é obrigatório.</small>
+              </div>
+            </label>
+
+            <label>Cidade:
+              <input [(ngModel)]="aluno.endereco.cidade" name="cidade" placeholder="Cidade" required
+                #cidade="ngModel" />
+              <div *ngIf="cidade.invalid && (cidade.dirty || cidade.touched)">
+                <small class="error-message" *ngIf="cidade.errors?.['required']">Cidade é obrigatória.</small>
+              </div>
+            </label>
+
+            <label>Estado:
+              <input [(ngModel)]="aluno.endereco.estado" name="estado" placeholder="Estado" required
+                #estado="ngModel" />
+              <div *ngIf="estado.invalid && (estado.dirty || estado.touched)">
+                <small class="error-message" *ngIf="estado.errors?.['required']">Estado é obrigatório.</small>
+              </div>
+            </label>
+
+          </div>
+
+        </label>
+
+        <label>
+          Data de Nascimento:
+          <input [(ngModel)]="aluno.dataDeNascimento" name="dataDeNascimento" type="date" required />
+          <div *ngIf="!aluno.dataDeNascimento">
+            <small class="error-message">Data de Nascimento é obrigatória.</small>
+          </div>
+        </label>
+        
+        <label id="formacao">
+          Formação:
+          <select [(ngModel)]="aluno.formacao" name="formacao" id="formacao" required>
+            <option value="">Selecione a formação</option>
+            <option value="N/A">N/A</option>
+            <option value="ensino_fundamental_incompleto">Ensino Fundamental Incompleto</option>
+            <option value="ensino_fundamental_completo">Ensino Fundamental Completo</option>
+            <option value="ensino_medio_incompleto">Ensino Médio Incompleto</option>
+            <option value="ensino_medio_completo">Ensino Médio Completo</option>
+            <option value="ensino_superior_incompleto">Ensino Superior Incompleto</option>
+            <option value="ensino_superior_completo">Ensino Superior Completo</option>
+            <option value="pos_graduacao">Pós-graduação</option>
+            <!-- Adicione mais opções conforme necessário -->
+          </select>
+          <div *ngIf="!aluno.formacao">
+            <small class="error-message">Formação é obrigatória.</small>
+          </div>
+        </label>
+
+        <label>
+          Profissão:
+          <input [(ngModel)]="aluno.profissao" name="profissao" />
+        </label>
+
+        <label id="moduloFeito">
+          Módulo Feito:
+          <select [(ngModel)]="aluno.moduloFeito" name="moduloFeito" required>
+            <option value="">Selecione o Módulo feito</option>
+            <option value="beginners_1">Beginners 1</option>
+            <option value="beginners_2">Beginners 2</option>
+            <option value="elementary_1">Elementary 1</option>
+            <option value="elementary_2">Elementary_2</option>
+            <option value="pre_intermediate_1">Pre Intermediate 1</option>
+            <option value="pre_intermediate_2">Pre Intermediate 2</option>
+            <option value="pre_intermediate_plus_1">Pre Intermediate Plus 1</option>
+            <option value="pre_intermediate_plus_2">Pre Intermediate Plus 2</option>
+            <option value="intermediate_1">Intermediate 1</option>
+            <option value="intermediate_2">Intermediate 2</option>
+            <option value="pre_advanced_1">Pre Advanced 1</option>
+            <option value="pre_advanced_2">Pre Advanced 2</option>
+            <option value="advanced_1">Advanced 1</option>
+            <option value="advanced_2">Advanced 2</option>
+            <option value="advanced_plus_1">Advanced Plus 1</option>
+            <option value="advanced_plus_2">Advanced Plus 2</option>
+          </select>
+          <div *ngIf="!aluno.moduloFeito">
+            <small class="error-message">Módulo feito é obrigatório.</small>
+          </div>
+        </label>
+
+        <label id="nivel">
+          Nível:
+          <select [(ngModel)]="aluno.nivel" name="nivel" required>
+            <option value="">Selecione o Módulo feito</option>
+            <option value="beginners_1">Beginners 1</option>
+            <option value="beginners_2">Beginners 2</option>
+            <option value="elementary_1">Elementary 1</option>
+            <option value="elementary_2">Elementary_2</option>
+            <option value="pre_intermediate_1">Pre Intermediate 1</option>
+            <option value="pre_intermediate_2">Pre Intermediate 2</option>
+            <option value="pre_intermediate_plus_1">Pre Intermediate Plus 1</option>
+            <option value="pre_intermediate_plus_2">Pre Intermediate Plus 2</option>
+            <option value="intermediate_1">Intermediate 1</option>
+            <option value="intermediate_2">Intermediate 2</option>
+            <option value="pre_advanced_1">Pre Advanced 1</option>
+            <option value="pre_advanced_2">Pre Advanced 2</option>
+            <option value="advanced_1">Advanced 1</option>
+            <option value="advanced_2">Advanced 2</option>
+            <option value="advanced_plus_1">Advanced Plus 1</option>
+            <option value="advanced_plus_2">Advanced Plus 2</option>
+          </select>
+          <div *ngIf="!aluno.nivel">
+            <small class="error-message">Nível é obrigatório.</small>
+          </div>
+        </label>
+
+        <label id="status">
+          Status:
+          <select [(ngModel)]="aluno.status" name="status" required>
+            <option value="ATIVADO">Ativado</option>
+            <option value="DESATIVADO">Desativado</option>
+          </select>
+          <div *ngIf="!aluno.status">
+            <small class="error-message">Status é obrigatório.</small>
+          </div>
+        </label>
+
+        <div class="button-container">
+          <button class="button-salvar" type="submit">Salvar</button>
+          <button class="button-cancelar" (click)="cancelar()">Cancelar</button>
+        </div>
+      </form>
     </section>
   </div>
-</div>
 
-<div *ngIf="!aluno">
-  <p>Detalhes do aluno não encontrados.</p>
-</div>
+
+  <div *ngIf="!aluno">
+    <p>Detalhes do aluno não encontrados.</p>
+  </div>

@@ -4,7 +4,8 @@ import { MainComponent } from './components/main/main.component';
 import { AlunosCadastroComponent } from './components/alunos-cadastro/alunos-cadastro.component';
 import { ConsultarAlunosComponent } from './components/consultar-alunos/consultar-alunos.component';
 import { AlunoDetalhesComponent } from './components/aluno-detalhes/aluno-detalhes.component';
-import { ProfessoresCadastroComponent } from './components/professores-cadastro/professores-cadastro.component';
+import { CadastrarProfessorComponent } from './components/professores-cadastro/professores-cadastro.component';
+import { ConsultarProfessoresComponent } from './components/consultar-professores/consultar-professores.component';
 // Adicione outros componentes conforme necessário
 
 const routes: Routes = [
@@ -13,7 +14,9 @@ const routes: Routes = [
   { path: 'alunos-detalhes/:id', component: AlunoDetalhesComponent },
   { path: 'alunos-cadastros', component: AlunosCadastroComponent},
   { path: 'consulta-alunos', component: ConsultarAlunosComponent},
-  { path: 'cadastro-professores', component: ProfessoresCadastroComponent}
+  { path: 'cadastro-professores', component: CadastrarProfessorComponent},
+  { path: 'consulta-professores', component: ConsultarProfessoresComponent}
+  
   // Adicione outras rotas conforme necessário
 ];
 

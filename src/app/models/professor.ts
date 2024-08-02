@@ -1,24 +1,32 @@
-// professor.model.ts
-export interface Endereco {
-    // Defina os campos do endereço conforme necessário
-    idEndereco: number;
-    rua: string;
-    numero: string;
-    complemento: string;
-    bairro: string;
-    cidade: string;
-    estado: string;
-    cep: string;
+import { Endereco } from './endereco';
+
+export class Professor {
+  idProfessor?: any;
+  nomeProfessor: string;
+  cpf: string;
+  endereco: Endereco;
+  email: string;
+  login: string;
+  password: string;
+  whatsapp: string;
+
+  constructor(
+    nomeProfessor: string,
+    cpf: string,
+    endereco: Endereco,
+    email: string,
+    login: string,
+    password: string,
+    whatsapp: string,
+    idProfessor?: any
+  ) {
+    this.idProfessor = idProfessor;
+    this.nomeProfessor = nomeProfessor;
+    this.cpf = cpf;
+    this.endereco = endereco;
+    this.email = email;
+    this.login = login;
+    this.password = password;
+    this.whatsapp = whatsapp;
   }
-  
-  export interface Professor {
-    idProfessor: number;
-    nomeProfessor: string;
-    cpfCnpj: string;
-    endereco: Endereco;
-    email: string;
-    login: string;
-    password: string;
-    whatsapp: string;
-  }
-  
+}
