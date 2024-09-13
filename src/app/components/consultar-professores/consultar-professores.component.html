@@ -13,7 +13,7 @@
         <option value="ATIVADO">Ativado</option>
         <option value="DESATIVADO">Desativado</option>
         <option value="">Todos os status</option>
-      </select>
+    </select>
     
 
       <input type="text" [(ngModel)]="filterValue" placeholder="Pesquisar professores" class="selectFiltro" *ngIf="filterColumn !== 'status'">
@@ -47,7 +47,7 @@
         <tbody>
             <ng-container *ngFor="let professor of sortedProfessores; let i = index">
                 <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela"
-                    [routerLink]="['/professores-detalhes', professor.idProfessor]" style="cursor: pointer;">
+                    [routerLink]="['/professor-detalhes', professor.idProfessor]" style="cursor: pointer;">
                     <td class="td">{{ professor.nomeProfessor }}</td>
                     <td class="td centralizandoTextoTabela">{{ professor.idProfessor }}</td>
                     <td class="td centralizandoTextoTabela">{{ professor.email }}</td>

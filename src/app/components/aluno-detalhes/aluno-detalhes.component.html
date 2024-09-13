@@ -24,6 +24,8 @@
       <p><strong>Nível:</strong> {{ aluno.nivel }}</p>
       <p><strong>Status:</strong> {{ aluno.status }}</p>
 
+      <p><strong>Turma:</strong> {{ turma?.nomeTurma || 'Não disponível' }}</p>
+
       <div class="button-container">
         <button class="button-editar" (click)="editar()">Editar</button>
         <button class="button-voltar" (click)="voltar()">Voltar</button>
@@ -120,7 +122,7 @@
             <small class="error-message">Data de Nascimento é obrigatória.</small>
           </div>
         </label>
-        
+
         <label id="formacao">
           Formação:
           <select [(ngModel)]="aluno.formacao" name="formacao" id="formacao" required>
@@ -205,6 +207,17 @@
           </select>
           <div *ngIf="!aluno.status">
             <small class="error-message">Status é obrigatório.</small>
+          </div>
+        </label>
+
+        <label id="idTurma">
+          Turma:
+          <select [(ngModel)]="aluno.turma" name="idTurma" required>
+            <option value="">Selecione a Turma</option>
+            <option *ngFor="let turma of turmas" [value]="turma.idTurma">{{ turma.nomeTurma }}</option>
+          </select>
+          <div *ngIf="!aluno.turma">
+            <small class="error-message">Turma é obrigatória.</small>
           </div>
         </label>
 

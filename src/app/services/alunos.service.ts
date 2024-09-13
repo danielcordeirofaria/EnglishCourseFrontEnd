@@ -7,6 +7,7 @@ import { Aluno } from '../models/aluno';
   providedIn: 'root'
 })
 export class AlunosService {
+ 
   private apiUrl = 'http://localhost:8080/alunos'; // URL base do seu backend
 
   constructor(private http: HttpClient) { }

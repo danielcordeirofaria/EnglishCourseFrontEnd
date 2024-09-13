@@ -20,17 +20,17 @@ export class ConsultarProfessoresComponent implements OnInit {
   sortedProfessores: Professor[] = [];
   faSortUp = faSortUp;
   faSortDown = faSortDown;
-filterStatus: any;
+  filterStatus:  string = '';
 
-  constructor(private professorService: ProfessorService) {}
+  constructor(private professorService: ProfessorService) { }
 
   ngOnInit(): void {
     this.loadProfessores();
   }
-  
+
 
   loadProfessores() {
-    this.professorService.listarProfessor().subscribe(
+    this.professorService.listarProfessores().subscribe(
       (data: Professor[]) => {
         this.professores = data;
         this.sortedProfessores = [...this.professores];
@@ -56,7 +56,7 @@ filterStatus: any;
       }
     });
   }
-  
+
 
   ordenandoLista(coluna: string): void {
     if (this.sortColumn === coluna) {
@@ -65,21 +65,21 @@ filterStatus: any;
       this.sortColumn = coluna;
       this.sortDirection = 'asc';
     }
-  
+
     this.sortedProfessores.sort((a, b) => {
       const valorA = a[coluna as keyof Professor];
       const valorB = b[coluna as keyof Professor];
-  
+
       if (typeof valorA === 'string' && typeof valorB === 'string') {
         return this.sortDirection === 'asc' ? valorA.localeCompare(valorB) : valorB.localeCompare(valorA);
       }
-  
+
       if (typeof valorA === 'number' && typeof valorB === 'number') {
         return this.sortDirection === 'asc' ? valorA - valorB : valorB - valorA;
       }
-  
+
       return 0;
     });
   }
-  
+
 }

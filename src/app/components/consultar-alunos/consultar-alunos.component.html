@@ -61,6 +61,10 @@
           <fa-icon *ngIf="sortColumn === 'nivel' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
           <fa-icon *ngIf="sortColumn === 'nivel' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
         </th>
+        <th class="th centralizandoTextoTabela" (click)="ordenandoLista('nivel')">Turma
+          <fa-icon *ngIf="sortColumn === 'nivel' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
+          <fa-icon *ngIf="sortColumn === 'nivel' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -69,9 +73,10 @@
           [routerLink]="['/alunos-detalhes', aluno.idAlunoMatricula]" style="cursor: pointer;">
           <td class="td">{{ aluno.nome }}</td>
           <td class="td centralizandoTextoTabela">{{ aluno.idAlunoMatricula }}</td>
-          <td class="td centralizandoTextoTabela">{{ calcularIdade(aluno.dataDeNascimento) }}</td>
+          <td class="td centralizandoTextoTabela">{{ calcularIdade(aluno.dataDeNascimento) }}</td>  
           <td class="td centralizandoTextoTabela">{{ aluno.dataDeNascimento | date:'dd/MM/yyyy' }}</td>
           <td class="td centralizandoTextoTabela">{{ aluno.nivel }}</td>
+          <td class="td centralizandoTextoTabela">{{retornarNomeDaTurma(aluno.turma.turma)}}</td>
         </tr>
       </ng-container>
     </tbody>

@@ -4,21 +4,27 @@ import { Observable } from 'rxjs';
 import { Professor } from '../models/professor';
 
 @Injectable({
-  providedIn: 'root'  // Isso faz com que o serviço esteja disponível globalmente
+  providedIn: 'root'
 })
 export class ProfessorService {
 
-  private apiUrl = 'http://localhost:8080/professores'; // URL base do seu backend
+  private apiUrl = 'http://localhost:8080/professores';
 
   constructor(private http: HttpClient) { }
 
-  // Método para obter a lista de professores
-  listarProfessor(): Observable<Professor[]> {
-    return this.http.get<Professor[]>(`${this.apiUrl}`);
+  listarProfessores(): Observable<Professor[]> {
+    return this.http.get<Professor[]>(this.apiUrl);
+  }
+
+  buscarProfessorPorId(id: number): Observable<Professor> {
+    return this.http.get<Professor>(`${this.apiUrl}/${id}`);
   }
 
   createProfessor(professor: Professor): Observable<Professor> {
     return this.http.post<Professor>(this.apiUrl, professor);
   }
-  
+
+  atualizarProfessor(id: number, professor: Professor): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, professor);
+  }
 }

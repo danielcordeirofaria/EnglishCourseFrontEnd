@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Aluno } from '../../models/aluno';
 import { AlunosService } from '../../services/alunos.service';
 import { faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
+import { Turma } from '../../models/turma';
+import { TurmaService } from '../../services/turma.service';
 
 @Component({
   selector: 'app-consultar-alunos',
@@ -22,12 +24,32 @@ export class ConsultarAlunosComponent implements OnInit {
   filterStatus: string = ''; // Status do filtro
   faSortUp = faSortUp;
   faSortDown = faSortDown;
-
-  constructor(private alunosService: AlunosService) { }
+  turma: Turma[] = [];
+  
+  constructor(
+    private alunosService: AlunosService,
+    private turmaService: TurmaService 
+  ) {}
 
   ngOnInit(): void {
     this.buscarAlunos();
+    this.carregarTurmas(); // Adicione esta linha para carregar as turmas
+
   }
+
+  // Carregar turmas de uma fonte de dados
+carregarTurmas(): void {
+  // Supondo que você tenha um serviço que busca as turmas
+  this.turmaService.listarTurmas()
+    .subscribe(
+      (turmas: Turma[]) => {
+        this.turma = turmas;
+      },
+      (error: any) => {
+        console.error('Erro ao buscar turmas', error);
+      }
+    );
+}
 
   buscarAlunos(): void {
     this.alunosService.listarAlunos()
@@ -42,16 +64,6 @@ export class ConsultarAlunosComponent implements OnInit {
         }
       );
   }
-
-  // ordenandoLista(): void {
-  //   this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-  //   this.sortedAlunos.sort((a, b) => {
-  //     if (this.sortDirection === 'asc') {
-  //       return a.nome.localeCompare(b.nome);
-  //     } else {
-  //       return b.nome.localeCompare(a.nome);
-  //     }
-  //   });
 
   ordenandoLista(coluna: string): void {
     if (this.sortColumn === coluna) {
@@ -113,6 +125,12 @@ export class ConsultarAlunosComponent implements OnInit {
     }
     return idade;
   }
+
+  retornarNomeDaTurma(turma: number): string {
+    const turmaEncontrada = this.turma.find((turma: any) => turma.turma === turma);
+    return turmaEncontrada ? turmaEncontrada.nomeTurma : 'Turma não encontrada';
+  }
+
 
 
 

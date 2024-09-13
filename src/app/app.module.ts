@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CadastrarProfessorComponent } from './components/professores-cadastro/professores-cadastro.component';
 import { ConsultarProfessoresComponent } from './components/consultar-professores/consultar-professores.component';
+import { ProfessorDetalhesComponent } from './components/professor-detalhes/professor-detalhes.component';
 
 
 @NgModule({ declarations: [
@@ -28,7 +29,8 @@ import { ConsultarProfessoresComponent } from './components/consultar-professore
         ConsultarAlunosComponent,
         AlunoDetalhesComponent,
         CadastrarProfessorComponent,
-        ConsultarProfessoresComponent
+        ConsultarProfessoresComponent,
+        ProfessorDetalhesComponent
     ],
     bootstrap: [AppComponent],
     imports: [BrowserModule,

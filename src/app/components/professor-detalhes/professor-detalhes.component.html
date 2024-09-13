@@ -1,0 +1,126 @@
+<h1>Detalhes do Professor</h1>
+
+<div *ngIf="professor" class="sectionProfessor">
+  <div *ngIf="!modoEdicao">
+    <section class="detalhes">
+      <p><strong>Nome:</strong> {{ professor.nomeProfessor }}</p>
+      <p><strong>CPF/CNPJ:</strong> {{ professor.cpf }}</p>
+      <p><strong>Email:</strong> {{ professor.email }}</p>
+      <p><strong>WhatsApp:</strong> {{ professor.whatsapp }}</p>
+
+      <p><strong>Endereço:</strong></p>
+      <div class="endereco">
+        <p><strong>Logradouro:</strong> {{ professor.endereco.logradouro }}</p>
+        <p><strong>Número:</strong> {{ professor.endereco.numero }}</p>
+        <p><strong>Bairro:</strong> {{ professor.endereco.bairro }}</p>
+        <p><strong>Cidade:</strong> {{ professor.endereco.cidade }}</p>
+        <p><strong>Estado:</strong> {{ professor.endereco.estado }}</p>
+        <p><strong>CEP:</strong> {{ professor.endereco.cep }}</p>
+      </div>
+
+      <div class="button-container">
+        <button class="button-editar" (click)="editar()">Editar</button>
+        <button class="button-voltar" (click)="voltar()">Voltar</button>
+      </div>
+    </section>
+  </div>
+
+  <div *ngIf="modoEdicao">
+    <section class="edicao">
+      <form #form="ngForm" (ngSubmit)="salvar()">
+        <label>
+          Nome:
+          <input [(ngModel)]="professor.nomeProfessor" name="nomeProfessor" required />
+          <div *ngIf="!professor.nomeProfessor">
+            <small class="error-message">Nome é obrigatório.</small>
+          </div>
+        </label>
+
+        <label>
+          CPF/CNPJ:
+          <input [(ngModel)]="professor.cpf" name="cpf" required />
+          <div *ngIf="!professor.cpf">
+            <small class="error-message">CPF é obrigatório.</small>
+          </div>
+        </label>
+
+        <label>
+          Email:
+          <input [(ngModel)]="professor.email" name="email" required />
+          <div *ngIf="!professor.email">
+            <small class="error-message">Email é obrigatório.</small>
+          </div>
+        </label>
+
+        <label>
+          WhatsApp:
+          <input [(ngModel)]="professor.whatsapp" name="whatsapp" required />
+          <div *ngIf="!professor.whatsapp">
+            <small class="error-message">WhatsApp é obrigatório.</small>
+          </div>
+        </label>
+
+        <label>
+          Endereço:
+          <div class="endereco">
+            <label>CEP:
+              <input [(ngModel)]="professor.endereco.cep" name="cep" placeholder="CEP" required #cep="ngModel"
+                (blur)="buscarCep(professor.endereco.cep)" />
+              <div *ngIf="cep.invalid && (cep.dirty || cep.touched)">
+                <small class="error-message" *ngIf="cep.errors?.['required']">CEP é obrigatório.</small>
+              </div>
+            </label>
+            <label>Logradouro:
+              <input [(ngModel)]="professor.endereco.logradouro" name="logradouro" placeholder="Logradouro" required
+                #logradouro="ngModel" />
+              <div *ngIf="logradouro.invalid && (logradouro.dirty || logradouro.touched)">
+                <small class="error-message" *ngIf="logradouro.errors?.['required']">Logradouro é obrigatório.</small>
+              </div>
+            </label>
+
+            <label>Número:
+              <input [(ngModel)]="professor.endereco.numero" name="numero" placeholder="Número" required
+                #numero="ngModel" />
+              <div *ngIf="numero.invalid && (numero.dirty || numero.touched)">
+                <small class="error-message" *ngIf="numero.errors?.['required']">Número é obrigatório.</small>
+              </div>
+            </label>
+
+            <label>Bairro:
+              <input [(ngModel)]="professor.endereco.bairro" name="bairro" placeholder="Bairro" required
+                #bairro="ngModel" />
+              <div *ngIf="bairro.invalid && (bairro.dirty || bairro.touched)">
+                <small class="error-message" *ngIf="bairro.errors?.['required']">Bairro é obrigatório.</small>
+              </div>
+            </label>
+
+            <label>Cidade:
+              <input [(ngModel)]="professor.endereco.cidade" name="cidade" placeholder="Cidade" required
+                #cidade="ngModel" />
+              <div *ngIf="cidade.invalid && (cidade.dirty || cidade.touched)">
+                <small class="error-message" *ngIf="cidade.errors?.['required']">Cidade é obrigatória.</small>
+              </div>
+            </label>
+
+            <label>Estado:
+              <input [(ngModel)]="professor.endereco.estado" name="estado" placeholder="Estado" required
+                #estado="ngModel" />
+              <div *ngIf="estado.invalid && (estado.dirty || estado.touched)">
+                <small class="error-message" *ngIf="estado.errors?.['required']">Estado é obrigatório.</small>
+              </div>
+            </label>
+          </div>
+        </label>
+
+        <div class="button-container">
+          <button class="button-salvar" type="submit">Salvar</button>
+          <button class="button-cancelar" (click)="cancelar()">Cancelar</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div *ngIf="!professor">
+    <p>Detalhes do professor não encontrados.</p>
+  </div>
+</div>

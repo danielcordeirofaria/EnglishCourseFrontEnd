@@ -38,7 +38,7 @@ export class CadastrarProfessorComponent implements OnInit {
         bairro: ['', Validators.required],
         cidade: ['', Validators.required],
         estado: ['', Validators.required],
-        cep: ['', [Validators.required, Validators.pattern('[0-9]{5}-[0-9]{3}')]],
+        cep: ['', [Validators.required, Validators.pattern('^\\d{8}$|^\\d{2}\\.\\d{3}-\\d{3}$|^\\d{5}-\\d{3}$')]],
       }),
       email: ['', [Validators.required, Validators.email]],
       login: ['', Validators.required],
@@ -73,6 +73,8 @@ export class CadastrarProfessorComponent implements OnInit {
       this.loading = true;
       const formValue = this.professorForm.value;
 
+      const cepLimpo = formValue.endereco.cep.replace(/\D/g, '');
+
       console.log('Form Value:', formValue);
 
       // Criar instância de Endereco
@@ -82,7 +84,7 @@ export class CadastrarProfessorComponent implements OnInit {
         formValue.endereco.bairro,
         formValue.endereco.cidade,
         formValue.endereco.estado,
-        formValue.endereco.cep,
+        cepLimpo,
         formValue.endereco.complemento // Opcional
       );
 

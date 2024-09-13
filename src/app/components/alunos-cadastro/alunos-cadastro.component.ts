@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CepService } from '../../services/cep.service';
 import { AlunosService } from '../../services/alunos.service';
-import { ProfessorService } from '../../services/professor.service';  // Importa o serviço de professores
+import { TurmaService } from '../../services/turma.service';  
 import { Aluno } from '../../models/aluno';
 import { Endereco } from '../../models/endereco';
 import { Router } from '@angular/router';
+import { Turma } from '../../models/turma';
 import { Professor } from '../../models/professor';
 
 @Component({
@@ -16,25 +17,26 @@ import { Professor } from '../../models/professor';
 export class AlunosCadastroComponent implements OnInit {
   public alunoForm!: FormGroup;
   public loading: boolean = false;
-  professores: Professor[] = [];  // Tipo correto para professores
+  professores: Professor[] = []; 
+  turmas: Turma[] = [];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private alunoService: AlunosService,
     private cepService: CepService,
-    private professorService: ProfessorService  // Injeção do serviço de professores
-  ) { }
+    private turmaService: TurmaService 
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
-    this.loadProfessores();
+    this.loadTurmas();
   }
 
-  loadProfessores() {
-    this.professorService.listarProfessor().subscribe(
-      (data: Professor[]) => this.professores = data,
-      (error: any) => console.error('Erro ao carregar professores:', error)
+  loadTurmas() {
+    this.turmaService.listarTurmas().subscribe(
+      (data: Turma[]) => this.turmas = data,
+      (error: any) => console.error('Erro ao carregar turmas:', error)
     );
   }
 
@@ -48,7 +50,7 @@ export class AlunosCadastroComponent implements OnInit {
         bairro: ['', Validators.required],
         cidade: ['', Validators.required],
         estado: ['', Validators.required],
-        cep: ['', Validators.required],
+        cep: ['', Validators.required],      
       }),
       dataDeNascimento: ['', Validators.required],
       cpf: ['', Validators.required],
@@ -57,8 +59,8 @@ export class AlunosCadastroComponent implements OnInit {
       profissao: ['', Validators.required],
       moduloFeito: ['', Validators.required],
       nivel: ['', Validators.required],
-      professor: ['', Validators.required],
-      status: ['', Validators.required]
+      status: ['', Validators.required],
+      idTurma: ['', Validators.required]
     });
   }
   
@@ -83,10 +85,12 @@ export class AlunosCadastroComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log("Entrando no submit")
     if (this.alunoForm.valid) {
+      console.log("Entrando no if")
       this.loading = true;
       const formValue = this.alunoForm.value;
-  
+
       // Log para verificar o valor do formulário
       console.log('Form Value:', formValue);
   
@@ -110,8 +114,8 @@ export class AlunosCadastroComponent implements OnInit {
         formValue.profissao,
         formValue.moduloFeito,
         formValue.nivel,
-        Number(formValue.professor), // Certifique-se de que aqui é um número
-        formValue.status
+        formValue.status,
+        Number(formValue.idTurma)
       );
       
       console.log('Novo Aluno:', novoAluno);
@@ -130,6 +134,8 @@ export class AlunosCadastroComponent implements OnInit {
           this.loading = false;
         }
       });
+    }else{
+      console.log("deu ruim")
     }
   }
 }

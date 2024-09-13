@@ -163,16 +163,7 @@
       <small class="error-message" *ngIf="alunoForm.get('nivel')?.errors?.['required']">Nível é obrigatório.</small>
     </div>
   </div>
-  <!-- src/app/components/consultar-alunos/consultar-alunos.component.html -->
-  <div class="form-group">
-    <label for="professor">Professor:</label>
-    <select id="professor" formControlName="professor">
-      <option *ngFor="let professor of professores" [value]="professor.idProfessor">{{ professor.nomeProfessor }}</option>
-    </select>
-    <div *ngIf="alunoForm.get('professor')?.invalid && (alunoForm.get('professor')?.dirty || alunoForm.get('professor')?.touched)">
-      <small class="error-message" *ngIf="alunoForm.get('professor')?.errors?.['required']">Professor é obrigatório.</small>
-    </div>
-  </div>
+
   <div class="form-group">
     <label for="status">Status:</label>
     <select id="status" formControlName="status">
@@ -185,10 +176,17 @@
     </div>
   </div>
 
-  <!-- Cadatrar turma do aluno: -->
-  <!-- <div class="turma">
-    <label for="turma">Turma:</label>
-  </div> -->
+  <div class="form-group">
+    <label for="idTurma">Turma:</label>
+    <select id="idTurma" formControlName="idTurma">
+      <option value="">Selecione a Turma</option>
+      <option *ngFor="let turma of turmas" [value]="turma.idTurma">{{ turma.nomeTurma }}</option>
+    </select>
+    <div *ngIf="alunoForm.get('idTurma')?.invalid && (alunoForm.get('idTurma')?.dirty || alunoForm.get('idTurma')?.touched)">
+      <small class="error-message" *ngIf="alunoForm.get('idTurma')?.errors?.['required']">Turma é obrigatória.</small>
+    </div>
+  </div>
+
 
   <button type="submit" [disabled]="loading">Cadastrar</button>
 </form>
