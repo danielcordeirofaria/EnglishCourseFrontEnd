@@ -212,9 +212,9 @@
 
         <label id="idTurma">
           Turma:
-          <select [(ngModel)]="aluno.turma" name="idTurma" required>
+          <select [(ngModel)]="aluno.turma.nomeTurma" name="idTurma" required>
             <option value="">Selecione a Turma</option>
-            <option *ngFor="let turma of turmas" [value]="turma.idTurma">{{ turma.nomeTurma }}</option>
+            <option *ngFor="let turma of turmas">{{ aluno.turma.nomeTurma}}</option>
           </select>
           <div *ngIf="!aluno.turma">
             <small class="error-message">Turma é obrigatória.</small>

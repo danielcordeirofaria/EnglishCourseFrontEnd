@@ -1,7 +1,8 @@
-import { Endereco } from "./endereco";
+import { Endereco } from './endereco';
+import { Turma } from './turma'; // Certifique-se de importar a classe correta
 
 export class Aluno {
-  idAlunoMatricula!: any|string;
+  idAlunoMatricula!: any | string;
   nome: string;
   endereco: Endereco;
   dataDeNascimento: string;
@@ -12,7 +13,7 @@ export class Aluno {
   moduloFeito: string;
   nivel: string;
   status: string;
-  turma: { turma: number};
+  turma: Turma; // Use a classe Turma diretamente
 
   constructor(
     nome: string,
@@ -25,7 +26,7 @@ export class Aluno {
     moduloFeito: string,
     nivel: string,
     status: string,
-    turma: number
+    turma: Turma // Use a classe Turma diretamente
   ) {
     this.nome = nome;
     this.endereco = endereco;
@@ -37,6 +38,6 @@ export class Aluno {
     this.moduloFeito = moduloFeito;
     this.nivel = nivel;
     this.status = status;
-    this.turma = {turma};
+    this.turma = turma; // Atribua a turma corretamente
   }
 }

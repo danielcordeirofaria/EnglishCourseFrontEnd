@@ -76,7 +76,7 @@
           <td class="td centralizandoTextoTabela">{{ calcularIdade(aluno.dataDeNascimento) }}</td>  
           <td class="td centralizandoTextoTabela">{{ aluno.dataDeNascimento | date:'dd/MM/yyyy' }}</td>
           <td class="td centralizandoTextoTabela">{{ aluno.nivel }}</td>
-          <td class="td centralizandoTextoTabela">{{retornarNomeDaTurma(aluno.turma.turma)}}</td>
+          <td class="td centralizandoTextoTabela">{{ retornarNomeDaTurma(aluno.turma.idTurma) }}</td>
         </tr>
       </ng-container>
     </tbody>

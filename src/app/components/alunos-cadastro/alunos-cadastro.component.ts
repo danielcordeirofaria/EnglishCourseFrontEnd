@@ -115,7 +115,7 @@ export class AlunosCadastroComponent implements OnInit {
         formValue.moduloFeito,
         formValue.nivel,
         formValue.status,
-        Number(formValue.idTurma)
+        formValue.idTurma
       );
       
       console.log('Novo Aluno:', novoAluno);

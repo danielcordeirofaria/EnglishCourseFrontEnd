@@ -39,7 +39,7 @@ export class AlunoDetalhesComponent implements OnInit {
   
           // Buscar a turma associada ao aluno
           if (this.aluno.turma) { // Verifique se 'turma' não é nulo ou indefinido
-            this.retornarTurmaPeloId(this.aluno.turma.turma);
+            this.retornarTurmaPeloId(this.aluno.turma.idTurma);
           }
         },
         (error: any) => {
