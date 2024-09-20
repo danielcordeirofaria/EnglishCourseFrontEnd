@@ -76,7 +76,7 @@
           <td class="td centralizandoTextoTabela">{{ calcularIdade(aluno.dataDeNascimento) }}</td>  
           <td class="td centralizandoTextoTabela">{{ aluno.dataDeNascimento | date:'dd/MM/yyyy' }}</td>
           <td class="td centralizandoTextoTabela">{{ aluno.nivel }}</td>
-          <td class="td centralizandoTextoTabela">{{ aluno.turma?.idTurma !== undefined ? retornarNomeDaTurma(aluno.turma.idTurma) : 'Turma não disponível' }}</td>        
+          <td class="td centralizandoTextoTabela">{{ aluno.turma.idTurma !== undefined ? retornarNomeDaTurma(aluno.turma.idTurma) : 'Turma não definida' }}</td>        
         
         </tr>
       </ng-container>

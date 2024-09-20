@@ -66,8 +66,4 @@ export class TurmaComponent implements OnInit {
       );
     }
   }
-  
-  
-  
-  
 }

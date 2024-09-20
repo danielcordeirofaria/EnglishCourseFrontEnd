@@ -214,7 +214,6 @@
           Turma:
           <select [(ngModel)]="aluno.turma.idTurma" name="idTurma" required>
             <option value="">Selecione a Turma</option>
-            <!-- <option *ngFor="let turma of turmas" [ngValue]="turma.idTurma">{{ turma.nomeTurma }}</option> -->
             <option *ngFor="let turma of turmas" [value]="turma.idTurma">{{ turma.nomeTurma }}</option>
           </select>
           <div *ngIf="!aluno.turma">
