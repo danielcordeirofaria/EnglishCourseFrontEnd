@@ -1,13 +1,13 @@
 import { Professor } from './professor';
 
 export class Turma {
-  idTurma: number;
+  idTurma?: number;
   nomeTurma: string;
-  professor: Professor;
+  professor: { idProfessor: number };
 
   constructor(idTurma: number, nomeTurma: string, professor: Professor) {
     this.idTurma = idTurma;
     this.nomeTurma = nomeTurma;
-    this.professor = professor;
+    this.professor = { idProfessor: professor.idProfessor };
   }
 }

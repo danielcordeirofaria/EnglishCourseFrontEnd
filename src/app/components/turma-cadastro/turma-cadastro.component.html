@@ -1,0 +1,33 @@
+<h1>Cadastro de Turmas</h1>
+
+<form [formGroup]="turmaForm" (ngSubmit)="onSubmit()">
+  <div class="form-group formulario">
+    <label for="nomeTurma">Nome da Turma:</label>
+    <input id="nomeTurma" formControlName="nomeTurma">
+    <div>
+      <small class="error-message" *ngIf="turmaForm.get('nomeTurma')?.errors?.['required']">Nome da turma é obrigatório.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="professor">Professor:</label>
+    <select id="professor" formControlName="professor">
+      <option value="" disabled>Selecione um professor</option>
+      <option *ngFor="let professor of professores" [value]="professor.idProfessor">
+        {{ professor.nomeProfessor }}
+      </option>
+    </select>
+    <div *ngIf="turmaForm.get('professor')?.invalid && (turmaForm.get('professor')?.dirty || turmaForm.get('professor')?.touched)">
+      <small class="error-message" *ngIf="turmaForm.get('professor')?.errors?.['required']">Professor é obrigatório.</small>
+    </div>
+  </div>
+  
+
+  <div class="form-group botoesDiv">
+    <button type="submit" [disabled]="loading">Salvar</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    Carregando...
+  </div>
+</form>

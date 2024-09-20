@@ -212,15 +212,16 @@
 
         <label id="idTurma">
           Turma:
-          <select [(ngModel)]="aluno.turma.nomeTurma" name="idTurma" required>
+          <select [(ngModel)]="aluno.turma.idTurma" name="idTurma" required>
             <option value="">Selecione a Turma</option>
-            <option *ngFor="let turma of turmas">{{ aluno.turma.nomeTurma}}</option>
+            <!-- <option *ngFor="let turma of turmas" [ngValue]="turma.idTurma">{{ turma.nomeTurma }}</option> -->
+            <option *ngFor="let turma of turmas" [value]="turma.idTurma">{{ turma.nomeTurma }}</option>
           </select>
           <div *ngIf="!aluno.turma">
             <small class="error-message">Turma é obrigatória.</small>
           </div>
         </label>
-
+      
         <div class="button-container">
           <button class="button-salvar" type="submit">Salvar</button>
           <button class="button-cancelar" (click)="cancelar()">Cancelar</button>

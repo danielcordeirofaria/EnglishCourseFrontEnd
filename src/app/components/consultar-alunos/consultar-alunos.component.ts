@@ -126,10 +126,11 @@ carregarTurmas(): void {
     return idade;
   }
 
-  retornarNomeDaTurma(idTurma: number): string {
+  retornarNomeDaTurma(idTurma?: number): string {
     const turmaEncontrada = this.turma.find((t) => t.idTurma === idTurma);
     return turmaEncontrada ? turmaEncontrada.nomeTurma : 'Turma não encontrada';
   }
+  
 
 
 

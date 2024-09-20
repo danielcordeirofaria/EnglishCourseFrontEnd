@@ -19,5 +19,9 @@ export class TurmaService {
   retornarTurmaPeloId(idTurma: any): Observable<Turma> {
     return this.http.get<Turma>(`${this.apiUrl}/${idTurma}`)
   }
+
+  createTurma(turma: Turma): Observable<any> {
+    return this.http.post<Turma>(this.apiUrl, turma);
+  }
   
 }

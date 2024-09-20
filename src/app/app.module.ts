@@ -16,6 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CadastrarProfessorComponent } from './components/professores-cadastro/professores-cadastro.component';
 import { ConsultarProfessoresComponent } from './components/consultar-professores/consultar-professores.component';
 import { ProfessorDetalhesComponent } from './components/professor-detalhes/professor-detalhes.component';
+import { TurmaComponent } from './components/turma-cadastro/turma-cadastro.component';
 
 
 @NgModule({ declarations: [
@@ -30,13 +31,14 @@ import { ProfessorDetalhesComponent } from './components/professor-detalhes/prof
         AlunoDetalhesComponent,
         CadastrarProfessorComponent,
         ConsultarProfessoresComponent,
-        ProfessorDetalhesComponent
-    ],
+        ProfessorDetalhesComponent,
+        TurmaComponent    ],
     bootstrap: [AppComponent],
     imports: [BrowserModule,
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
         FontAwesomeModule,
+        ReactiveFormsModule,
         CommonModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
         export class AppModule { }

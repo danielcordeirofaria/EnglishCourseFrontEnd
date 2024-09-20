@@ -13,7 +13,7 @@ export class Aluno {
   moduloFeito: string;
   nivel: string;
   status: string;
-  turma: Turma; // Use a classe Turma diretamente
+  turma: Turma; 
 
   constructor(
     nome: string,
@@ -26,7 +26,7 @@ export class Aluno {
     moduloFeito: string,
     nivel: string,
     status: string,
-    turma: Turma // Use a classe Turma diretamente
+    turma: Turma
   ) {
     this.nome = nome;
     this.endereco = endereco;
@@ -38,6 +38,6 @@ export class Aluno {
     this.moduloFeito = moduloFeito;
     this.nivel = nivel;
     this.status = status;
-    this.turma = turma; // Atribua a turma corretamente
+    this.turma = turma;
   }
 }

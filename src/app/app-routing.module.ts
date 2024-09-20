@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 import { AlunosCadastroComponent } from './components/alunos-cadastro/alunos-cadastro.component';
@@ -7,7 +7,7 @@ import { AlunoDetalhesComponent } from './components/aluno-detalhes/aluno-detalh
 import { CadastrarProfessorComponent } from './components/professores-cadastro/professores-cadastro.component';
 import { ConsultarProfessoresComponent } from './components/consultar-professores/consultar-professores.component';
 import { ProfessorDetalhesComponent } from './components/professor-detalhes/professor-detalhes.component';
-// Adicione outros componentes conforme necessário
+import { TurmaComponent } from './components/turma-cadastro/turma-cadastro.component'
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'consulta-alunos', component: ConsultarAlunosComponent},
   { path: 'cadastro-professores', component: CadastrarProfessorComponent},
   { path: 'consulta-professores', component: ConsultarProfessoresComponent},
-  { path: 'professor-detalhes/:id', component: ProfessorDetalhesComponent}
+  { path: 'professor-detalhes/:id', component: ProfessorDetalhesComponent},
+  { path: 'turma-cadastro', component: TurmaComponent}
   
   // Adicione outras rotas conforme necessário
 ];

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CepService } from '../../services/cep.service';
 import { AlunosService } from '../../services/alunos.service';
-import { TurmaService } from '../../services/turma.service';  
+import { TurmaService } from '../../services/turma.service';
 import { Aluno } from '../../models/aluno';
 import { Endereco } from '../../models/endereco';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { Professor } from '../../models/professor';
 export class AlunosCadastroComponent implements OnInit {
   public alunoForm!: FormGroup;
   public loading: boolean = false;
-  professores: Professor[] = []; 
+  professores: Professor[] = [];
   turmas: Turma[] = [];
 
   constructor(
@@ -25,8 +25,8 @@ export class AlunosCadastroComponent implements OnInit {
     private router: Router,
     private alunoService: AlunosService,
     private cepService: CepService,
-    private turmaService: TurmaService 
-  ) {}
+    private turmaService: TurmaService
+  ) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -35,7 +35,11 @@ export class AlunosCadastroComponent implements OnInit {
 
   loadTurmas() {
     this.turmaService.listarTurmas().subscribe(
-      (data: Turma[]) => this.turmas = data,
+      (data: Turma[]) => {
+        this.turmas = data;
+        // Exemplo de como fazer o console.log para o nome da turma
+        data.forEach(turma => console.log(turma.nomeTurma));
+      },
       (error: any) => console.error('Erro ao carregar turmas:', error)
     );
   }
@@ -50,7 +54,7 @@ export class AlunosCadastroComponent implements OnInit {
         bairro: ['', Validators.required],
         cidade: ['', Validators.required],
         estado: ['', Validators.required],
-        cep: ['', Validators.required],      
+        cep: ['', Validators.required],
       }),
       dataDeNascimento: ['', Validators.required],
       cpf: ['', Validators.required],
@@ -63,7 +67,7 @@ export class AlunosCadastroComponent implements OnInit {
       idTurma: ['', Validators.required]
     });
   }
-  
+
   buscarCep(cep: string) {
     this.cepService.buscarCep(cep).subscribe(
       data => this.populateEndereco(data),
@@ -93,7 +97,7 @@ export class AlunosCadastroComponent implements OnInit {
 
       // Log para verificar o valor do formulário
       console.log('Form Value:', formValue);
-  
+
       const endereco = new Endereco(
         formValue.endereco.logradouro,
         formValue.endereco.numero,
@@ -103,7 +107,7 @@ export class AlunosCadastroComponent implements OnInit {
         formValue.endereco.cep,
         formValue.endereco.complemento
       );
-  
+
       const novoAluno = new Aluno(
         formValue.nome,
         endereco,
@@ -117,9 +121,7 @@ export class AlunosCadastroComponent implements OnInit {
         formValue.status,
         formValue.idTurma
       );
-      
-      console.log('Novo Aluno:', novoAluno);
-  
+
       this.alunoService.cadastrarAluno(novoAluno).subscribe({
         next: (res: any) => {
           this.loading = false;
@@ -134,7 +136,7 @@ export class AlunosCadastroComponent implements OnInit {
           this.loading = false;
         }
       });
-    }else{
+    } else {
       console.log("deu ruim")
     }
   }

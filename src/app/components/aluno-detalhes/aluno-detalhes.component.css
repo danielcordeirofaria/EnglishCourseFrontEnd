@@ -148,7 +148,7 @@ button {
     margin-top: 0.2rem;
 }
 
-#formacao, #nivel, #moduloFeito, #status{
+#formacao, #nivel, #moduloFeito, #status, #idTurma{
     display: flex;
     flex-direction: column;
 }

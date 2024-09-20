@@ -14,7 +14,6 @@ h1 {
   text-align: center;
 }
 
-.endereco,
 div {
   display: flex;
   flex-direction: column;
@@ -74,14 +73,14 @@ button:active {
   ;
 }
 
-.cepLogradouro {
-  display: flex;
-  flex-direction: row;
-}
-
-.logradouro {
-  width: 100%;
-  margin-left: 1rem;
+.form-container {
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -90,33 +89,22 @@ form {
   width: 100%;
 }
 
-.numeroComplemento {
-  display: flex;
-  flex-direction: row;
-
-}
-
-.complemento {
-  margin-left: 1rem;
-
-}
-
-.nascimento {
-  width: 10rem;
-}
-
-.cpf {
-  width: 20rem;
-  margin-left: 1rem;
-}
-
-.dataCpf {
-  display: flex;
-  flex-direction: row;
-
-}
-
 .custom-select option:hover {
   background-color: var(--red);
 
+}
+
+.forulario{
+  display: flex;
+  flex-direction: column;
+}
+
+.botoesDiv{
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.botoesDiv button{
+  width: 10rem;
 }

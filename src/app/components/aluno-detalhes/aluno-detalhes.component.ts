@@ -4,6 +4,7 @@ import { Aluno } from '../../models/aluno';
 import { AlunosService } from '../../services/alunos.service';
 import { HttpClient } from '@angular/common/http';
 import { TurmaService } from '../../services/turma.service'; // Importe o serviço de Turma
+import { Turma } from '../../models/turma';
 
 @Component({
   selector: 'app-aluno-detalhes',
@@ -13,7 +14,7 @@ import { TurmaService } from '../../services/turma.service'; // Importe o servi�
 export class AlunoDetalhesComponent implements OnInit {
   aluno: Aluno | undefined;
   turma: any; // Adicione uma propriedade para armazenar a turma
-  turmas: any[] = []; // Adicione uma propriedade para armazenar as turmas disponíveis
+  turmas: Turma[] = []; // Altere para o tipo correto
   modoEdicao: boolean = false;
   alunoOriginal: Aluno | undefined;
 
@@ -27,8 +28,9 @@ export class AlunoDetalhesComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarDetalhesAluno();
-    this.carregarTurmas(); // Carregue as turmas disponíveis
+    this.carregarTurmas();
   }
+
   carregarDetalhesAluno(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
     this.alunosService.buscarAlunoPorId(id)
@@ -37,9 +39,8 @@ export class AlunoDetalhesComponent implements OnInit {
           this.aluno = aluno;
           this.alunoOriginal = { ...aluno };
   
-          // Buscar a turma associada ao aluno
-          if (this.aluno.turma) { // Verifique se 'turma' não é nulo ou indefinido
-            this.retornarTurmaPeloId(this.aluno.turma.idTurma);
+          if (this.aluno && this.aluno.turma) {
+            this.retornarTurmaPeloId(this.aluno.turma.idTurma!);
           }
         },
         (error: any) => {
@@ -48,11 +49,9 @@ export class AlunoDetalhesComponent implements OnInit {
       );
   }
   
-  
-
   carregarTurmas(): void {
     this.turmaService.listarTurmas().subscribe(
-      (turmas: any[]) => {
+      (turmas: Turma[]) => {
         this.turmas = turmas;
       },
       (error: any) => {
@@ -63,7 +62,7 @@ export class AlunoDetalhesComponent implements OnInit {
 
   retornarTurmaPeloId(idTurma: number): void {
     this.turmaService.retornarTurmaPeloId(idTurma).subscribe(
-      (turma: any) => {
+      (turma: Turma) => {
         this.turma = turma;
       },
       (error: any) => {
@@ -109,17 +108,20 @@ export class AlunoDetalhesComponent implements OnInit {
     this.modoEdicao = true;
   }
 
-   salvar(): void {
+  salvar(): void {
+    console.log("Tentando salvar a atualização do aluno")
+
     if (this.aluno) {
       const id = this.aluno.idAlunoMatricula!;
       this.alunosService.atualizarAluno(id, this.aluno).subscribe(
         (res: any) => {
-          console.log('Aluno salvo com sucesso:', res);
+          console.log('id enviado', res.turma.idTurma);
           this.modoEdicao = false;
           this.voltar();
         },
         (err: any) => {
           console.error('Erro ao salvar aluno', err);
+          console.error('Detalhes do erro:', err.error || err.message || err);
         }
       );
     }
@@ -127,6 +129,6 @@ export class AlunoDetalhesComponent implements OnInit {
 
   cancelar(): void {
     this.modoEdicao = false;
-    this.aluno = this.alunoOriginal; // Reverte as alterações
+    this.aluno = this.alunoOriginal;
   }
 }
