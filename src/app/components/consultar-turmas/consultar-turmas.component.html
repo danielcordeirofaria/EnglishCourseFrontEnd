@@ -1,0 +1,39 @@
+<h1>Consultar Turmas</h1>
+
+<div>
+  <select [(ngModel)]="filterColumn" class="selectFiltro">
+    <option value="nomeTurma">Nome da Turma</option>
+    <option value="id">ID</option>
+    <option value="nomeProfessor">Nome do Professor</option>
+  </select>
+
+  <input type="text" [(ngModel)]="filterValue" placeholder="Pesquisar turmas" class="selectFiltro">
+  <button (click)="filtrarTurmas()">Filtrar</button>
+</div>
+
+<div class="listaTurmas">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="th" (click)="ordenandoLista('nomeTurma')">Nome da Turma
+          <fa-icon *ngIf="sortColumn === 'nomeTurma' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
+          <fa-icon *ngIf="sortColumn === 'nomeTurma' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
+        </th>
+        <th class="th centralizandoTextoTabela" (click)="ordenandoLista('id')">ID
+          <fa-icon *ngIf="sortColumn === 'id' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
+          <fa-icon *ngIf="sortColumn === 'id' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
+        </th>
+        <th class="th centralizandoTextoTabela">Nome do Professor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let turma of sortedTurmas; let i = index">
+        <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela" style="cursor: pointer;">
+          <td class="td">{{ turma.nomeTurma }}</td>
+          <td class="td centralizandoTextoTabela">{{ turma.idTurma }}</td>
+          <td class="td centralizandoTextoTabela">{{ getNomeProfessor(turma.professor.idProfessor) }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

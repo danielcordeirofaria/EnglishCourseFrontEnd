@@ -4,6 +4,7 @@ import { TurmaService } from '../../services/turma.service';
 import { ProfessorService } from '../../services/professor.service';
 import { Professor } from '../../models/professor';
 import { Turma } from '../../models/turma';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-turma',
@@ -18,7 +19,8 @@ export class TurmaComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private turmaService: TurmaService,
-    private professorService: ProfessorService
+    private professorService: ProfessorService,
+    private router: Router
   ) {
     this.turmaForm = this.formBuilder.group({
       nomeTurma: ['', Validators.required],
@@ -33,7 +35,7 @@ export class TurmaComponent implements OnInit {
   carregarProfessores() {
     this.professorService.listarProfessores().subscribe(
       (data: Professor[]) => {
-        console.log('Professores carregados:', data);
+
         this.professores = data;
       },
       (error: any) => {
@@ -58,6 +60,7 @@ export class TurmaComponent implements OnInit {
           console.log('Turma salva:', response);
           this.loading = false;
           this.turmaForm.reset();
+          this.router.navigate(['/consultar-turmas.html']);
         },
         (error) => {
           console.error('Erro ao salvar a turma:', error);

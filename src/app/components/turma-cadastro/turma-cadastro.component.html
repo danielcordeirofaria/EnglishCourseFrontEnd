@@ -5,8 +5,10 @@
     <label for="nomeTurma">Nome da Turma:</label>
     <input id="nomeTurma" formControlName="nomeTurma">
     <div>
-      <small class="error-message" *ngIf="turmaForm.get('nomeTurma')?.errors?.['required']">Nome da turma é obrigatório.</small>
-    </div>
+      <small class="error-message" *ngIf="turmaForm.get('nomeTurma')?.errors?.['required'] && (turmaForm.get('nomeTurma')?.touched || turmaForm.get('nomeTurma')?.dirty)">
+        Nome da turma é obrigatório.
+      </small>
+          </div>
   </div>
 
   <div class="form-group">
