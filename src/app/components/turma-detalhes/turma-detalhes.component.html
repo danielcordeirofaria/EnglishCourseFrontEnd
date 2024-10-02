@@ -1,0 +1,41 @@
+<h1 class="titulo-pagina">Detalhes da Turma</h1>
+
+<section class="detalhes-turma" *ngIf="turma">
+  <h2 class="nome-turma">{{ turma.nomeTurma }}</h2>
+  <p class="turma-info"><strong>ID:</strong> {{ turma.idTurma }}</p>
+  <p class="turma-info">
+    <strong>Nome do Professor:</strong> {{ getNomeProfessor(turma.professor.idProfessor) }}
+  </p>
+</section>
+
+<div *ngIf="!turma" class="loading">
+  <p>Carregando detalhes da turma...</p>
+</div>
+
+<div class="listaAlunos">
+  <h2 class="nome-turma">Alunos da turma {{ turma?.nomeTurma }}</h2>
+
+  <table *ngIf="alunos && alunos.length > 0; else noAlunosMessage">
+    <thead>
+      <tr>
+        <th class="th">Nome</th>
+        <th class="th">Id aluno</th>
+        <th class="th">Nível do Aluno</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let aluno of alunos; let i = index;">
+        <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela"
+          [routerLink]="['/alunos-detalhes', aluno.idAlunoMatricula]" style="cursor: pointer;">
+          <td class="td">{{ aluno.nome }}</td>
+          <td class="td centralizandoTextoTabela">{{ aluno.idAlunoMatricula }}</td>
+          <td class="td centralizandoTextoTabela">{{ aluno.nivel }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <ng-template #noAlunosMessage>
+    <p>Nenhum aluno encontrado para esta turma.</p>
+  </ng-template>
+</div>

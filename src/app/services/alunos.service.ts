@@ -7,8 +7,7 @@ import { Aluno } from '../models/aluno';
   providedIn: 'root'
 })
 export class AlunosService {
- 
-  private apiUrl = 'http://localhost:8080/alunos'; // URL base do seu backend
+  private apiUrl = 'http://localhost:8080/alunos'; // Base URL of your backend
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +15,6 @@ export class AlunosService {
     return this.http.post<any>(this.apiUrl, aluno);
   }
 
-  // Método para listar nomes dos alunos
   listarAlunos(): Observable<Aluno[]> {
     return this.http.get<Aluno[]>(`${this.apiUrl}`);
   }
@@ -25,11 +23,12 @@ export class AlunosService {
     return this.http.get<Aluno>(`${this.apiUrl}/${id}`);
   }
 
-  // Método para atualizar um aluno
   atualizarAluno(id: number, aluno: Aluno): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, aluno);
   }
 
-  
+  listarAlunoPorIdTurma(idTurma: number): Observable<Aluno[]> {
+    return this.http.get<Aluno[]>(`${this.apiUrl}/turma/${idTurma}`);
+  }
 
 }

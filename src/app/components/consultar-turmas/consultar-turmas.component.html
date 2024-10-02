@@ -28,7 +28,7 @@
     </thead>
     <tbody>
       <ng-container *ngFor="let turma of sortedTurmas; let i = index">
-        <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela" style="cursor: pointer;">
+        <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela" [routerLink]="['/turma-detalhes', turma.idTurma]" style="cursor: pointer;">
           <td class="td">{{ turma.nomeTurma }}</td>
           <td class="td centralizandoTextoTabela">{{ turma.idTurma }}</td>
           <td class="td centralizandoTextoTabela">{{ getNomeProfessor(turma.professor.idProfessor) }}</td>

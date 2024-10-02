@@ -9,6 +9,7 @@ import { ConsultarProfessoresComponent } from './components/consultar-professore
 import { ProfessorDetalhesComponent } from './components/professor-detalhes/professor-detalhes.component';
 import { TurmaComponent } from './components/turma-cadastro/turma-cadastro.component'
 import { ConsultarTurmasComponent } from './components/consultar-turmas/consultar-turmas.component';
+import { TurmaDetalhesComponent } from './components/turma-detalhes/turma-detalhes.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'consulta-professores', component: ConsultarProfessoresComponent},
   { path: 'professor-detalhes/:id', component: ProfessorDetalhesComponent},
   { path: 'turma-cadastro', component: TurmaComponent},
-  { path: 'consultar-turmas', component: ConsultarTurmasComponent}
+  { path: 'consultar-turmas', component: ConsultarTurmasComponent},
+  { path: 'turma-detalhes/:id', component: TurmaDetalhesComponent}
   
   // Adicione outras rotas conforme necessário
 ];

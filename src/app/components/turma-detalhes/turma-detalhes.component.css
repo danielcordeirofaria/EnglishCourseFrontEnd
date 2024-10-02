@@ -1,0 +1,98 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex: 1;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  /* Cor de fundo similar */
+}
+
+.titulo-pagina {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #343a40;
+  /* Cor do título */
+  text-align: center;
+  /* Centralização do título */
+}
+
+.detalhes-turma {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+  /* Margem inferior */
+}
+
+.nome-turma {
+  font-size: 1.8rem;
+  /* Tamanho do nome da turma */
+  margin-bottom: 0.5rem;
+  /* Margem inferior */
+}
+
+.turma-info {
+  font-size: 1.2rem;
+  /* Tamanho das informações da turma */
+  margin: 0.5rem 0;
+  /* Margens verticais */
+}
+
+.loading {
+  font-size: 1.2rem;
+  color: #6c757d;
+  /* Cor da mensagem de carregamento */
+}
+
+.th,
+.td {
+  padding: 10px;
+  /* Padding das células da tabela */
+  text-align: left;
+  /* Alinhamento do texto */
+  border: 1px solid #ddd;
+  /* Borda para cabeçalhos e células de dados */
+}
+
+/* Estilos para cabeçalhos da tabela */
+.th {
+  background-color: #f2f2f2;
+  /* Cor de fundo do cabeçalho */
+  font-weight: 600;
+  /* Negrito para cabeçalhos */
+}
+
+/* Estilos para linhas da tabela */
+.row-even {
+  background-color: #f9f9f9;
+  /* Cor para linhas pares */
+}
+
+.row-odd {
+  background-color: white;
+  /* Cor para linhas ímpares */
+}
+
+
+/* Efeito hover para as linhas da tabela */
+.linha-tabela:hover td {
+  background-color: var(--red);
+  /* Cor de fundo ao passar o mouse */
+  color: white;
+  /* Cor do texto ao passar o mouse */
+}
+
+/* Centralizando texto em células específicas */
+.centralizandoTextoTabela {
+  text-align: center;
+}
+
+.listaAlunos {
+  display: flex;
+  flex-direction: column;
+}

@@ -18,6 +18,7 @@ import { ConsultarProfessoresComponent } from './components/consultar-professore
 import { ProfessorDetalhesComponent } from './components/professor-detalhes/professor-detalhes.component';
 import { TurmaComponent } from './components/turma-cadastro/turma-cadastro.component';
 import { ConsultarTurmasComponent } from './components/consultar-turmas/consultar-turmas.component';
+import { TurmaDetalhesComponent } from './components/turma-detalhes/turma-detalhes.component';
 
 
 @NgModule({ declarations: [
@@ -34,7 +35,8 @@ import { ConsultarTurmasComponent } from './components/consultar-turmas/consulta
         ConsultarProfessoresComponent,
         ProfessorDetalhesComponent,
         TurmaComponent,
-        ConsultarTurmasComponent    ],
+        ConsultarTurmasComponent,
+        TurmaDetalhesComponent    ],
     bootstrap: [AppComponent],
     imports: [BrowserModule,
         AppRoutingModule,

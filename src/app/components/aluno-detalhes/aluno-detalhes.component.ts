@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Aluno } from '../../models/aluno';
 import { AlunosService } from '../../services/alunos.service';
 import { HttpClient } from '@angular/common/http';
-import { TurmaService } from '../../services/turma.service'; // Importe o serviço de Turma
+import { TurmaService } from '../../services/turma.service'; 
 import { Turma } from '../../models/turma';
+import { Location } from '@angular/common'; // Importação necessária para o Location
 
 @Component({
   selector: 'app-aluno-detalhes',
@@ -13,17 +14,18 @@ import { Turma } from '../../models/turma';
 })
 export class AlunoDetalhesComponent implements OnInit {
   aluno: Aluno | undefined;
-  turma: any; // Adicione uma propriedade para armazenar a turma
-  turmas: Turma[] = []; // Altere para o tipo correto
+  turma: Turma | undefined; // Altere para o tipo correto
+  turmas: Turma[] = [];
   modoEdicao: boolean = false;
   alunoOriginal: Aluno | undefined;
 
   constructor(
     private alunosService: AlunosService,
-    private turmaService: TurmaService, // Injete o serviço de Turma
+    private turmaService: TurmaService,
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private location: Location // Injete o Location
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +41,7 @@ export class AlunoDetalhesComponent implements OnInit {
           this.aluno = aluno;
           this.alunoOriginal = { ...aluno };
   
-          if (this.aluno && this.aluno.turma) {
+          if (this.aluno?.turma) {
             this.retornarTurmaPeloId(this.aluno.turma.idTurma!);
           }
         },
@@ -101,7 +103,7 @@ export class AlunoDetalhesComponent implements OnInit {
   }
 
   voltar(): void {
-    this.router.navigate(['/consulta-alunos']);
+    this.location.back();
   }
 
   editar(): void {
@@ -109,13 +111,13 @@ export class AlunoDetalhesComponent implements OnInit {
   }
 
   salvar(): void {
-    console.log("Tentando salvar a atualização do aluno")
+    console.log("Tentando salvar a atualização do aluno");
 
     if (this.aluno) {
       const id = this.aluno.idAlunoMatricula!;
       this.alunosService.atualizarAluno(id, this.aluno).subscribe(
-        (res: any) => {
-          console.log('id enviado', res.turma.idTurma);
+        (res: Aluno) => { // Mude para o tipo correto, se necessário
+          console.log('Aluno atualizado com sucesso', res);
           this.modoEdicao = false;
           this.voltar();
         },

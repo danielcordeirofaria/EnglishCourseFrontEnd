@@ -21,47 +21,82 @@ section {
 
 label {
     display: block;
-    margin: 1rem 0;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin: 0.5rem 0;
+}
+
+strong {
+    font-weight: 600;
+}
+
+.endereco {
+    margin-bottom: 1rem;
+}
+
+.endereco p,
+.endereco label {
+    margin: 0.5rem 0;
+}
+
+.input-container {
+    margin-bottom: 1rem;
 }
 
 input {
+    display: block;
+    margin: 0.5rem 0;
     padding: 0.5rem;
-    width: 100%;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.error-message {
-    color: red;
-    font-size: 0.8rem;
-    margin-top: 0.2rem;
+    width: 100%;
 }
 
 .button-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-}
-
-button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.button-editar {
-    background-color: #007bff;
-    color: white;
+    margin: 1.5rem;
 }
 
 .button-voltar,
+.button-editar,
+.button-salvar,
 .button-cancelar {
-    background-color: #6c757d;
-    color: white;
+    background-color: var(--red);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0 0.5rem;
 }
 
-.button-salvar {
-    background-color: #28a745;
-    color: white;
+.button-voltar:hover,
+.button-editar:hover,
+.button-salvar:hover,
+.button-cancelar:hover {
+    background-color: var(--yellow);
+    transform: scale(1.05);
+}
+
+.button-voltar:focus,
+.button-editar:focus,
+.button-salvar:focus,
+.button-cancelar:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--yellow);
+}
+
+.sectionProfessor {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.error-message {
+    font-size: 14px;
+    color: var(--red);
 }
