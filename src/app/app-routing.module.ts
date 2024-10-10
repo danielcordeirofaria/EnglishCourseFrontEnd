@@ -14,7 +14,7 @@ import { TurmaDetalhesComponent } from './components/turma-detalhes/turma-detalh
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'main', component: MainComponent },
-  { path: 'alunos-detalhes/:id', component: AlunoDetalhesComponent },
+  { path: 'aluno-detalhes/:id', component: AlunoDetalhesComponent },
   { path: 'alunos-cadastros', component: AlunosCadastroComponent},
   { path: 'consulta-alunos', component: ConsultarAlunosComponent},
   { path: 'cadastro-professores', component: CadastrarProfessorComponent},

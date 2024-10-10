@@ -12,7 +12,7 @@
   <p>Carregando detalhes da turma...</p>
 </div>
 
-<div class="listaAlunos">
+<div class="alunosEHorarios">
   <h2 class="nome-turma">Alunos da turma {{ turma?.nomeTurma }}</h2>
 
   <table *ngIf="alunos && alunos.length > 0; else noAlunosMessage">
@@ -25,8 +25,7 @@
     </thead>
     <tbody>
       <ng-container *ngFor="let aluno of alunos; let i = index;">
-        <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela"
-          [routerLink]="['/alunos-detalhes', aluno.idAlunoMatricula]" style="cursor: pointer;">
+        <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela">
           <td class="td">{{ aluno.nome }}</td>
           <td class="td centralizandoTextoTabela">{{ aluno.idAlunoMatricula }}</td>
           <td class="td centralizandoTextoTabela">{{ aluno.nivel }}</td>
@@ -38,4 +37,67 @@
   <ng-template #noAlunosMessage>
     <p>Nenhum aluno encontrado para esta turma.</p>
   </ng-template>
+
+  <div class="divHorarios">
+    <h2 class="tituloHorario">Horários</h2>
+    
+    <table *ngIf="horarios && horarios.length > 0; else noHorariosMessage">
+      <thead>
+        <tr>
+          <th class="th">Turma</th>
+          <th class="th">Dia da Semana</th>
+          <th class="th">Hora Início</th>
+          <th class="th">Hora Fim</th>
+          <th class="th">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let horario of horarios; let i = index;">
+          <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela">
+            <td class="td">{{ horario.nomeTurma }}</td>
+      
+            <!-- Dia da Semana - Exibe como select no modo de edição -->
+            <td class="td centralizandoTextoTabela">
+              <select *ngIf="horarioEditado === i" [(ngModel)]="horario.diaSemana">
+                <option value="DOMINGO">Domingo</option>
+                <option value="SEGUNDA">Segunda</option>
+                <option value="TERCA">Terça</option>
+                <option value="QUARTA">Quarta</option>
+                <option value="QUINTA">Quinta</option>
+                <option value="SEXTA">Sexta</option>
+                <option value="SABADO">Sábado</option>
+              </select>
+              <span *ngIf="horarioEditado !== i">{{ horario.diaSemana }}</span>
+            </td>
+      
+            <!-- Horário de Início -->
+            <td class="td centralizandoTextoTabela">
+              <input *ngIf="horarioEditado === i" [(ngModel)]="horario.horarioInicio" />
+              <span *ngIf="horarioEditado !== i">{{ horario.horarioInicio }}</span>
+            </td>
+      
+            <!-- Horário de Fim -->
+            <td class="td centralizandoTextoTabela">
+              <input *ngIf="horarioEditado === i" [(ngModel)]="horario.horarioFim" />
+              <span *ngIf="horarioEditado !== i">{{ horario.horarioFim }}</span>
+            </td>
+      
+            <!-- Botões de Ação -->
+            <td class="td">
+              <button *ngIf="horarioEditado !== i" (click)="editarHorario(i)">Editar</button>
+              <button *ngIf="horarioEditado === i" (click)="salvarHorario(i, horario.idHorario)">Salvar</button>
+              <button *ngIf="horarioEditado === i" (click)="cancelarEdicao()">Cancelar</button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+      
+    </table>
+  
+    <ng-template #noHorariosMessage>
+      <p>Nenhum horário encontrado para esta turma.</p>
+    </ng-template>
+  </div>
+  
+
 </div>
