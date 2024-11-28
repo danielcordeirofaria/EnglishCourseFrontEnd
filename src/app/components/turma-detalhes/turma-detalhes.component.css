@@ -109,3 +109,67 @@
   margin: 1.5rem;
 }
 
+.botoesDiv{
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.botoesDiv button{
+  width: 10rem;
+}
+
+button {
+  border: 1px solid #000;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+  margin-top: 0.2rem;
+}
+
+button {
+  margin-top: 1rem;
+  background-color: var(--yellow);
+  color: black;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: bold; /* Adiciona negrito ao texto do botão */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Adiciona transições suaves para cor e transformação */
+}
+
+button:hover {
+  background-color: darkorange; /* Muda a cor do botão ao passar o mouse */
+  transform: scale(1.05); /* Aumenta o tamanho do botão em 5% */
+}
+
+button:focus {
+  outline: none; /* Remove o contorno padrão ao focar no botão */
+}
+
+.botoesDiv{
+  display: flex;
+  align-items: center;
+
+
+}
+
+.botoesDiv button{
+  width: 10rem;
+}
+
+.botaoNovoHorario{
+  display: flex;
+  justify-content: center;
+}
+
+.botaoEditarNaTabela{
+  margin: 0;
+  margin-right: 1rem;
+}
+
+.botaoExcluirNaTabela{
+  margin: 0;
+}

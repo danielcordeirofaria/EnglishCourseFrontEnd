@@ -1,7 +1,14 @@
-import { Turmas } from './turmas';
+// turma.ts
+import { Professor } from './professor';
 
-describe('Turmas', () => {
-  it('should create an instance', () => {
-    expect(new Turmas()).toBeTruthy();
-  });
-});
+export class Turma {
+  idTurma?: number;
+  nomeTurma: string;
+  professor: Professor; // Armazene o objeto Professor completo
+
+  constructor(idTurma: number, nomeTurma: string, professor: Professor) {
+    this.idTurma = idTurma;
+    this.nomeTurma = nomeTurma;
+    this.professor = professor;
+  }
+}

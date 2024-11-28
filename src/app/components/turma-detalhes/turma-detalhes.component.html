@@ -44,7 +44,6 @@
     <table *ngIf="horarios && horarios.length > 0; else noHorariosMessage">
       <thead>
         <tr>
-          <th class="th">Turma</th>
           <th class="th">Dia da Semana</th>
           <th class="th">Hora Início</th>
           <th class="th">Hora Fim</th>
@@ -54,8 +53,7 @@
       <tbody>
         <ng-container *ngFor="let horario of horarios; let i = index;">
           <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela">
-            <td class="td">{{ horario.nomeTurma }}</td>
-      
+ 
             <!-- Dia da Semana - Exibe como select no modo de edição -->
             <td class="td centralizandoTextoTabela">
               <select *ngIf="horarioEditado === i" [(ngModel)]="horario.diaSemana">
@@ -69,35 +67,62 @@
               </select>
               <span *ngIf="horarioEditado !== i">{{ horario.diaSemana }}</span>
             </td>
-      
+  
             <!-- Horário de Início -->
             <td class="td centralizandoTextoTabela">
               <input *ngIf="horarioEditado === i" [(ngModel)]="horario.horarioInicio" />
               <span *ngIf="horarioEditado !== i">{{ horario.horarioInicio }}</span>
             </td>
-      
+  
             <!-- Horário de Fim -->
             <td class="td centralizandoTextoTabela">
               <input *ngIf="horarioEditado === i" [(ngModel)]="horario.horarioFim" />
               <span *ngIf="horarioEditado !== i">{{ horario.horarioFim }}</span>
             </td>
-      
+  
             <!-- Botões de Ação -->
             <td class="td">
-              <button *ngIf="horarioEditado !== i" (click)="editarHorario(i)">Editar</button>
-              <button *ngIf="horarioEditado === i" (click)="salvarHorario(i, horario.idHorario)">Salvar</button>
+              <button *ngIf="horarioEditado !== i" (click)="editarHorario(i)" class="botaoEditarNaTabela">Editar</button>
+              <button *ngIf="horarioEditado === i && !criandoNovoHorario" (click)="salvarHorario(i, horario.idHorario)">Salvar</button>
               <button *ngIf="horarioEditado === i" (click)="cancelarEdicao()">Cancelar</button>
+              <button *ngIf="horarioEditado !== i" (click)="excluirHorario(horario.idHorario)" class="botaoExcluirNaTabela">Excluir</button> <!-- Botão de Excluir -->
             </td>
           </tr>
         </ng-container>
+  
+        <!-- Nova Linha para o Novo Horário -->
+        <tr *ngIf="criandoNovoHorario" class="linha-tabela nova-linha">
+          <td class="td centralizandoTextoTabela">
+            <select [(ngModel)]="novoHorario.diaSemana">
+              <option value="DOMINGO">Domingo</option>
+              <option value="SEGUNDA">Segunda</option>
+              <option value="TERCA">Terça</option>
+              <option value="QUARTA">Quarta</option>
+              <option value="QUINTA">Quinta</option>
+              <option value="SEXTA">Sexta</option>
+              <option value="SABADO">Sábado</option>
+            </select>
+          </td>
+          <td class="td centralizandoTextoTabela">
+            <input [(ngModel)]="novoHorario.horarioInicio" />
+          </td>
+          <td class="td centralizandoTextoTabela">
+            <input [(ngModel)]="novoHorario.horarioFim" />
+          </td>
+          <td class="td">
+            <button (click)="salvarNovoHorario()">Salvar</button>
+            <button (click)="cancelarNovoHorario()">Cancelar</button>
+          </td>
+        </tr>
       </tbody>
-      
     </table>
+  
+    <div class="form-group botoesDiv">
+      <button *ngIf="!criandoNovoHorario" [disabled]="loading" (click)="criarNovoHorario()" class="botaoNovoHorario">Novo Horário</button>
+    </div>
   
     <ng-template #noHorariosMessage>
       <p>Nenhum horário encontrado para esta turma.</p>
     </ng-template>
   </div>
-  
-
 </div>

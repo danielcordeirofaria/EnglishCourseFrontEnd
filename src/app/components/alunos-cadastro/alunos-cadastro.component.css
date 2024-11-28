@@ -14,8 +14,7 @@ h1 {
   text-align: center;
 }
 
-.endereco,
-div {
+.endereco, .form-group {
   display: flex;
   flex-direction: column;
 }
@@ -119,4 +118,22 @@ form {
 .custom-select option:hover {
   background-color: var(--red);
 
+}
+
+.inputDiv{
+  display: flex;
+  flex-direction: column;
+
+}
+
+#inputSim #inputNao{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+
+}
+
+#inputSim label, #inputNao label{
+  margin-left: 0.75rem;
 }

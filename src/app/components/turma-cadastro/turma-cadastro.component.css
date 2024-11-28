@@ -108,3 +108,8 @@ form {
 .botoesDiv button{
   width: 10rem;
 }
+
+.botaoNovoHorario{
+  display: flex;
+  
+}

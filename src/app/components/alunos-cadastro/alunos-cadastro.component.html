@@ -29,7 +29,6 @@
         <label for="numero">Número:</label>
         <input id="numero" formControlName="numero">
       </div>
-
       <div class="form-group complemento">
         <label for="complemento">Complemento:</label>
         <input id="complemento" formControlName="complemento">
@@ -39,17 +38,16 @@
       <label for="bairro">Bairro:</label>
       <input id="bairro" formControlName="bairro">
     </div>
-
     <div class="form-group">
       <label for="cidade">Cidade:</label>
       <input id="cidade" formControlName="cidade">
     </div>
-
     <div class="form-group">
       <label for="estado">Estado:</label>
       <input id="estado" formControlName="estado">
     </div>
   </div>
+
   <div class="dataCpf">
     <div class="form-group nascimento">
       <label for="dataDeNascimento">Data de Nascimento:</label>
@@ -57,11 +55,9 @@
       <div
         *ngIf="alunoForm.get('dataDeNascimento')?.invalid && (alunoForm.get('dataDeNascimento')?.dirty || alunoForm.get('dataDeNascimento')?.touched)">
         <small class="error-message" *ngIf="alunoForm.get('dataDeNascimento')?.errors?.['required']">Data de Nascimento
-          é
-          obrigatória.</small>
+          é obrigatória.</small>
       </div>
     </div>
-
     <div class="form-group cpf">
       <label for="cpf">CPF:</label>
       <input id="cpf" formControlName="cpf" appCpfFormat>
@@ -70,12 +66,23 @@
       </div>
     </div>
   </div>
+
   <div class="form-group">
     <label for="email">Email:</label>
     <input id="email" formControlName="email">
     <div *ngIf="alunoForm.get('email')?.invalid && (alunoForm.get('email')?.dirty || alunoForm.get('email')?.touched)">
       <small class="error-message" *ngIf="alunoForm.get('email')?.errors?.['required']">Email é obrigatório.</small>
       <small class="error-message" *ngIf="alunoForm.get('email')?.errors?.['email']">Formato de email inválido.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="whatsapp">Whatsapp:</label>
+    <input id="whatsapp" formControlName="whatsapp">
+    <div
+      *ngIf="alunoForm.get('whatsapp')?.invalid && (alunoForm.get('whatsapp')?.dirty || alunoForm.get('whatsapp')?.touched)">
+      <small class="error-message" *ngIf="alunoForm.get('whatsapp')?.errors?.['required']">whatsapp é
+        obrigatório.</small>
     </div>
   </div>
 
@@ -91,7 +98,6 @@
       <option value="ensino_superior_incompleto">Ensino Superior Incompleto</option>
       <option value="ensino_superior_completo">Ensino Superior Completo</option>
       <option value="pos_graduacao">Pós-graduação</option>
-      <!-- Adicione mais opções conforme necessário -->
     </select>
     <div
       *ngIf="alunoForm.get('formacao')?.invalid && (alunoForm.get('formacao')?.dirty || alunoForm.get('formacao')?.touched)">
@@ -100,16 +106,10 @@
     </div>
   </div>
 
-
   <div class="form-group">
     <label for="profissao">Profissão:</label>
     <input id="profissao" formControlName="profissao">
   </div>
-
-  <!-- <div class="form-group">
-    <label for="moduloMatriculado">Módulo Matriculado:</label>
-    <input id="moduloMatriculado" formControlName="moduloMatriculado">
-  </div> -->
 
   <div class="form-group">
     <label for="moduloFeito">Módulo Feito:</label>
@@ -118,7 +118,7 @@
       <option value="beginners_1">Beginners 1</option>
       <option value="beginners_2">Beginners 2</option>
       <option value="elementary_1">Elementary 1</option>
-      <option value="elementary_2">Elementary_2</option>
+      <option value="elementary_2">Elementary 2</option>
       <option value="pre_intermediate_1">Pre Intermediate 1</option>
       <option value="pre_intermediate_2">Pre Intermediate 2</option>
       <option value="pre_intermediate_plus_1">Pre Intermediate Plus 1</option>
@@ -132,8 +132,9 @@
       <option value="advanced_plus_1">Advanced Plus 1</option>
       <option value="advanced_plus_2">Advanced Plus 2</option>
     </select>
-    <div *ngIf="alunoForm.get('nivel')?.invalid && (alunoForm.get('nivel')?.dirty || alunoForm.get('nivel')?.touched)">
-      <small class="error-message" *ngIf="alunoForm.get('nivel')?.errors?.['required']">Módulo feito é
+    <div
+      *ngIf="alunoForm.get('moduloFeito')?.invalid && (alunoForm.get('moduloFeito')?.dirty || alunoForm.get('moduloFeito')?.touched)">
+      <small class="error-message" *ngIf="alunoForm.get('moduloFeito')?.errors?.['required']">Módulo feito é
         obrigatório.</small>
     </div>
   </div>
@@ -145,7 +146,7 @@
       <option value="beginers_1">Beginers 1</option>
       <option value="beginers_2">Beginers 2</option>
       <option value="elementary_1">Elementary 1</option>
-      <option value="elementary_2">Elementary_2</option>
+      <option value="elementary_2">Elementary 2</option>
       <option value="pre_intermediate_1">Pre Intermediate 1</option>
       <option value="pre_intermediate_2">Pre Intermediate 2</option>
       <option value="pre_intermediate_plus_1">Pre Intermediate Plus 1</option>
@@ -164,29 +165,79 @@
     </div>
   </div>
 
+  <button type="button" (click)="copiarDadosParaResponsavel()" [disabled]="!camposAlunoPreenchidos()">Copiar dados do
+    aluno para responsável</button>
+
   <div class="form-group">
-    <label for="status">Status:</label>
-    <select id="status" formControlName="status">
-      <option value="ATIVADO">Ativado</option>
-      <option value="DESATIVADO">Desativado</option>
+    <label for="nomeResponsavel">Nome do Responsável:</label>
+    <input type="text" id="nomeResponsavel" formControlName="nomeResponsavel">
+  </div>
+  <div class="form-group">
+    <label for="dataDeNascimentoResponsavel">Data de Nascimento:</label>
+    <input type="date" id="dataDeNascimentoResponsavel" formControlName="dataDeNascimentoResponsavel">
+  </div>
+  <div class="form-group">
+    <label for="cpfResponsavel">CPF do Responsável:</label>
+    <input type="text" id="cpfResponsavel" formControlName="cpfResponsavel">
+  </div>
+  <div class="form-group">
+    <label for="emailResponsavel">Email do Responsável:</label>
+    <input type="email" id="emailResponsavel" formControlName="emailResponsavel">
+  </div>
+  <div class="form-group">
+    <label for="whatsappResponsavel">Whatsapp do Responsável:</label>
+    <input type="tel" id="whatsappResponsavel" formControlName="whatsappResponsavel">
+  </div>
+  <div class="form-group">
+    <label for="formacaoResponsavel">Formação do Responsável:</label>
+    <select id="formacaoResponsavel" formControlName="formacaoResponsavel">
+      <option value="">Selecione a formação</option>
+      <option value="N/A">N/A</option>
+      <option value="ensino_fundamental_incompleto">Ensino Fundamental Incompleto</option>
+      <option value="ensino_fundamental_completo">Ensino Fundamental Completo</option>
+      <option value="ensino_medio_incompleto">Ensino Médio Incompleto</option>
+      <option value="ensino_medio_completo">Ensino Médio Completo</option>
+      <option value="ensino_superior_incompleto">Ensino Superior Incompleto</option>
+      <option value="ensino_superior_completo">Ensino Superior Completo</option>
+      <option value="pos_graduacao">Pós-graduação</option>
     </select>
-    <div
-      *ngIf="alunoForm.get('status')?.invalid && (alunoForm.get('status')?.dirty || alunoForm.get('status')?.touched)">
-      <small class="error-message" *ngIf="alunoForm.get('status')?.errors?.['required']">Status é obrigatório.</small>
-    </div>
   </div>
 
   <div class="form-group">
-    <label for="idTurma">Turma:</label>
-    <select id="idTurma" formControlName="idTurma">
-      <option value="">Selecione a Turma</option>
-      <option *ngFor="let turma of turmas" [value]="turma.idTurma">{{ turma.nomeTurma }}</option>
-    </select>
-    <div *ngIf="alunoForm.get('idTurma')?.invalid && (alunoForm.get('idTurma')?.dirty || alunoForm.get('idTurma')?.touched)">
-      <small class="error-message" *ngIf="alunoForm.get('idTurma')?.errors?.['required']">Turma é obrigatória.</small>
-    </div>
+    <label for="profissaoResponsavel">Profissão do Responsável:</label>
+    <input type="text" id="profissaoResponsavel" formControlName="profissaoResponsavel">
   </div>
 
+  <button type="button" (click)="copiarEnderecoParaResponsavel()" [disabled]="!camposAlunoPreenchidos()">Copiar endereço do aluno para responsável</button>
+
+  <div class="form-group"> 
+    <label for="cepResponsavel">CEP:</label>
+    <input id="cepResponsavel" formControlName="cep">
+  </div>
+  <div class="form-group">
+    <label for="logradouroResponsavel">Logradouro:</label>
+    <input type="text" id="logradouroResponsavel" formControlName="logradouro">
+  </div>
+  <div class="form-group">
+    <label for="numeroResponsavel">Número:</label>
+    <input type="text" id="numeroResponsavel" formControlName="numero">
+  </div>
+  <div class="form-group">
+    <label for="complementoResponsavel">Complemento:</label>
+    <input type="text" id="complementoResponsavel" formControlName="complemento">
+  </div>
+  <div class="form-group">
+    <label for="bairroResponsavel">Bairro:</label>
+    <input type="text" id="bairroResponsavel" formControlName="bairro">
+  </div>
+  <div class="form-group">
+    <label for="cidadeResponsavel">Cidade:</label>
+    <input type="text" id="cidadeResponsavel" formControlName="cidade">
+  </div>
+  <div class="form-group">
+    <label for="estadoResponsavel">Estado:</label>
+    <input type="text" id="estadoResponsavel" formControlName="estado">
+  </div>
 
   <button type="submit" [disabled]="loading">Cadastrar</button>
 </form>

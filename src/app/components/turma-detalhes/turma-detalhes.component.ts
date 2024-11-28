@@ -5,6 +5,7 @@ import { ProfessorService } from '../../services/professor.service';
 import { Turma } from '../../models/turma';
 import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { HorariosService } from '../../services/horarios.service';
+import { Horario } from '../../models/horario';
 
 @Component({
   selector: 'app-turma-detalhes',
@@ -19,6 +20,11 @@ export class TurmaDetalhesComponent implements OnInit {
   horarios: any[] = [];
   horarioEditado: number | null = null; // Para rastrear qual horário está sendo editado
   horariosOriginais: any[] = []; // Para armazenar os horários originais
+  loading = false;
+  criandoNovoHorario = false;
+  novoHorario!: {
+    turma: number; diaSemana: string; horarioInicio: string; horarioFim: string;
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -145,4 +151,76 @@ export class TurmaDetalhesComponent implements OnInit {
   getNomeProfessor(idProfessor: number): string {
     return this.professores[idProfessor] || 'Professor não encontrado';
   }
+
+  criarNovoHorario(): void {
+    this.criandoNovoHorario = true;
+    this.novoHorario = { // Inicializa o objeto com os valores padrão
+      turma: this.turma?.idTurma || 0,
+      diaSemana: '',
+      horarioInicio: '',
+      horarioFim: ''
+    };
+  }
+
+  salvarNovoHorario(): void {
+    if (this.novoHorario.diaSemana && this.novoHorario.horarioInicio && this.novoHorario.horarioFim) {
+      // Verifique se idTurma é definido
+      const idTurma = this.turma?.idTurma;
+      if (idTurma !== undefined) {
+        const horarioParaSalvar: Horario = {
+          turma: { idTurma }, // Certifique-se de que idTurma é um número
+          diaSemana: this.novoHorario.diaSemana,
+          horarioInicio: this.novoHorario.horarioInicio,
+          horarioFim: this.novoHorario.horarioFim
+        };
+  
+        this.horarios.push(horarioParaSalvar);
+        this.horarioService.createHorario(horarioParaSalvar).subscribe(
+          (response) => {
+            console.log('Novo horário salvo:', response);
+            this.criandoNovoHorario = false; // Reseta o estado
+            location.reload(); // Recarrega a página
+
+          },
+          (error) => {
+            console.error('Erro ao salvar horário:', error);
+          }
+        );
+      } else {
+        console.error('ID da turma não está definido!');
+      }
+    } else {
+      console.error('Preencha todos os campos do novo horário!');
+    }
+  }
+  
+  
+    cancelarNovoHorario(): void {
+      this.criandoNovoHorario = false; // Cancela a criação do novo horário
+      this.novoHorario = {
+        turma: this.turma?.idTurma || 0,
+        diaSemana: '',
+        horarioInicio: '',
+        horarioFim: ''
+      }; // Limpa os dados do novo horário com campos default
+    }
+    
+    excluirHorario(idHorario: number) {
+      if (confirm('Você tem certeza que deseja excluir este horário?')) {
+        this.horarioService.excluirHorario(idHorario).subscribe(
+          () => {
+            console.log('Horário excluído com sucesso.');
+            location.reload(); // Recarrega a página
+          },
+          (error) => {
+            console.error('Erro ao excluir horário:', error);
+          }
+        );
+      }
+    }
+ 
+
+  
+  
 }
+

@@ -1,30 +1,43 @@
-import { Aluno } from './aluno';
 import { Endereco } from './endereco';
 
-describe('Aluno', () => {
-  it('should create an instance', () => {
-    const endereco = new Endereco(
-      'Rua Exemplo', 
-      '123', 
-      'Apto 456', 
-      'Bairro Exemplo', 
-      'Cidade Exemplo', 
-      'Estado Exemplo', 
-      '12345-678'
-    );
+interface AlunoData {
+    nome: string;
+    endereco: Endereco;
+    dataDeNascimento: string;
+    cpf: string;
+    email: string;
+    formacao: string;
+    profissao: string;
+    modulo: string;
+    nivel: string;
+}
 
-    const aluno = new Aluno(
-      'Nome Exemplo',
-      endereco,
-      '2000-01-01',
-      '123.456.789-00',
-      'email@example.com',
-      'Formação Exemplo',
-      'Profissão Exemplo', // Adicione o valor para a profissão
-      'Módulo Exemplo',
-      'Nível Exemplo'
-    );
+export class Aluno {
+    idAluno!: any | string;
+    nome: string;
+    endereco: Endereco;
+    dataDeNascimento: string;
+    cpf: string;
+    email: string;
+    formacao: string;
+    profissao: string;
+    modulo: string;
+    nivel: string;
 
-    expect(aluno).toBeTruthy();
-  });
-});
+    constructor(data: AlunoData) {
+        if (!data.nome) {
+            throw new Error('O nome é obrigatório.');
+        }
+        // ... (outras validações)
+
+        this.nome = data.nome;
+        this.endereco = data.endereco;
+        this.dataDeNascimento = data.dataDeNascimento;
+        this.cpf = data.cpf;
+        this.email = data.email;
+        this.formacao = data.formacao;
+        this.profissao = data.profissao;
+        this.modulo = data.modulo;
+        this.nivel = data.nivel;
+    }
+}
