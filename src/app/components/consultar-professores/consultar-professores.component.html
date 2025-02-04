@@ -48,7 +48,7 @@
             <ng-container *ngFor="let professor of sortedProfessores; let i = index">
                 <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela"
                     [routerLink]="['/professor-detalhes', professor.idProfessor]" style="cursor: pointer;">
-                    <td class="td">{{ professor.nomeProfessor }}</td>
+                    <td class="td">{{ professor.nome }}</td>
                     <td class="td centralizandoTextoTabela">{{ professor.idProfessor }}</td>
                     <td class="td centralizandoTextoTabela">{{ professor.email }}</td>
                     <td class="td centralizandoTextoTabela">{{ professor.whatsapp }}</td>

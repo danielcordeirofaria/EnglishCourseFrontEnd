@@ -3,7 +3,7 @@
 <div *ngIf="professor" class="sectionProfessor">
   <div *ngIf="!modoEdicao">
     <section class="detalhes">
-      <p><strong>Nome:</strong> {{ professor.nomeProfessor }}</p>
+      <p><strong>Nome:</strong> {{ professor.nome }}</p>
       <p><strong>CPF/CNPJ:</strong> {{ professor.cpf }}</p>
       <p><strong>Email:</strong> {{ professor.email }}</p>
       <p><strong>WhatsApp:</strong> {{ professor.whatsapp }}</p>
@@ -30,8 +30,8 @@
       <form #form="ngForm" (ngSubmit)="salvar()">
         <label>
           Nome:
-          <input [(ngModel)]="professor.nomeProfessor" name="nomeProfessor" required />
-          <div *ngIf="!professor.nomeProfessor">
+          <input [(ngModel)]="professor.nome" name="nomeProfessor" required />
+          <div *ngIf="!professor.nome">
             <small class="error-message">Nome é obrigatório.</small>
           </div>
         </label>

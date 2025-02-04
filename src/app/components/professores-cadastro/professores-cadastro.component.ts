@@ -69,6 +69,8 @@ export class CadastrarProfessorComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log(this.professorForm)
+
     if (this.professorForm.valid) {
       this.loading = true;
       const formValue = this.professorForm.value;

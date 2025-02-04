@@ -16,7 +16,7 @@
     <select id="professor" formControlName="professor">
       <option value="" disabled>Selecione um professor</option>
       <option *ngFor="let professor of professores" [value]="professor.idProfessor">
-        {{ professor.nomeProfessor }}
+        {{ professor.nome }}
       </option>
     </select>
     <div *ngIf="turmaForm.get('professor')?.invalid && (turmaForm.get('professor')?.dirty || turmaForm.get('professor')?.touched)">

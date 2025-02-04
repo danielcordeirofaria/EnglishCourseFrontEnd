@@ -44,7 +44,7 @@ export class ConsultarTurmasComponent implements OnInit {
     this.professorService.listarProfessores().subscribe(
       (professores: Professor[]) => {
         professores.forEach(professor => {
-          this.professores[professor.idProfessor] = professor.nomeProfessor;
+          this.professores[professor.idProfessor] = professor.nome;
         });
       },
       (error: any) => console.error('Erro ao carregar professores:', error)

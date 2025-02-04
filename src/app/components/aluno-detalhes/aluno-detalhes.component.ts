@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Aluno } from '../../models/aluno';
 import { AlunosService } from '../../services/alunos.service';
 import { HttpClient } from '@angular/common/http';
-import { TurmaService } from '../../services/turma.service'; 
+import { TurmaService } from '../../services/turma.service';
 import { Turma } from '../../models/turma';
-import { Location } from '@angular/common'; // Importação necessária para o Location
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-aluno-detalhes',
@@ -14,10 +14,11 @@ import { Location } from '@angular/common'; // Importação necessária para o L
 })
 export class AlunoDetalhesComponent implements OnInit {
   aluno: Aluno | undefined;
-  turma: Turma | undefined; // Altere para o tipo correto
+  turma: Turma | undefined;
   turmas: Turma[] = [];
   modoEdicao: boolean = false;
   alunoOriginal: Aluno | undefined;
+  idTurmaSelecionada: number | undefined;
 
   constructor(
     private alunosService: AlunosService,
@@ -25,7 +26,7 @@ export class AlunoDetalhesComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private location: Location // Injete o Location
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -40,9 +41,12 @@ export class AlunoDetalhesComponent implements OnInit {
         (aluno: Aluno) => {
           this.aluno = aluno;
           this.alunoOriginal = { ...aluno };
-  
-          if (this.aluno?.turma) {
-            this.retornarTurmaPeloId(this.aluno.turma.idTurma!);
+          console.log("Aluno Carregado:", this.aluno); // Log para verificar os dados
+          if (this.aluno?.turma?.idTurma) { // Verifica se turma e idTurma existem
+            this.idTurmaSelecionada = this.aluno.turma.idTurma;
+            this.retornarTurmaPeloId(this.aluno.turma.idTurma);
+          } else {
+            this.idTurmaSelecionada = undefined;
           }
         },
         (error: any) => {
@@ -50,11 +54,12 @@ export class AlunoDetalhesComponent implements OnInit {
         }
       );
   }
-  
+
   carregarTurmas(): void {
     this.turmaService.listarTurmas().subscribe(
       (turmas: Turma[]) => {
         this.turmas = turmas;
+        console.log("Turmas carregadas:", this.turmas);
       },
       (error: any) => {
         console.error('Erro ao buscar turmas', error);
@@ -77,7 +82,7 @@ export class AlunoDetalhesComponent implements OnInit {
     if (cep && cep.length === 8) {
       this.http.get(`https://viacep.com.br/ws/${cep}/json/`).subscribe(
         (dados: any) => {
-          if (dados && this.aluno) {
+          if (dados && this.aluno && this.aluno.endereco) { // Verifica se aluno e endereco existem
             this.aluno.endereco.logradouro = dados.logradouro || '';
             this.aluno.endereco.bairro = dados.bairro || '';
             this.aluno.endereco.cidade = dados.localidade || '';
@@ -112,20 +117,59 @@ export class AlunoDetalhesComponent implements OnInit {
 
   salvar(): void {
     console.log("Tentando salvar a atualização do aluno");
-
+    console.log("ID da Turma Selecionada:", this.idTurmaSelecionada);
+  
     if (this.aluno) {
       const id = this.aluno.idAlunoMatricula!;
-      this.alunosService.atualizarAluno(id, this.aluno).subscribe(
-        (res: Aluno) => { // Mude para o tipo correto, se necessário
-          console.log('Aluno atualizado com sucesso', res);
-          this.modoEdicao = false;
-          this.voltar();
-        },
-        (err: any) => {
-          console.error('Erro ao salvar aluno', err);
-          console.error('Detalhes do erro:', err.error || err.message || err);
-        }
-      );
+      const alunoParaSalvar = this.aluno; // Variável local para o aluno
+  
+      if (this.idTurmaSelecionada) {
+        this.turmaService.retornarTurmaPeloId(this.idTurmaSelecionada).subscribe(
+          (turma: Turma | undefined) => {
+            if (turma) {
+              alunoParaSalvar.turma = turma; // Usa a variável local
+              console.log("Turma encontrada e atribuída:", alunoParaSalvar.turma);
+  
+              console.log("Objeto aluno antes de enviar para a API:", alunoParaSalvar);
+  
+              this.alunosService.atualizarAluno(id, alunoParaSalvar).subscribe( // Usa a variável local
+                (res: Aluno) => {
+                  console.log('Aluno atualizado com sucesso', res);
+                  this.modoEdicao = false;
+                  this.voltar();
+                },
+                (err: any) => {
+                  console.error('Erro ao salvar aluno', err);
+                  console.error('Detalhes do erro:', err.error || err.message || err);
+                }
+              );
+            } else {
+              console.error("Turma não encontrada para o ID:", this.idTurmaSelecionada);
+              alunoParaSalvar.turma = undefined; // Ou undefined, dependendo do seu modelo.
+            }
+          },
+          (error: any) => {
+            console.error("Erro ao buscar turma:", error);
+            alunoParaSalvar.turma = undefined; // Ou undefined, dependendo do seu modelo.
+          }
+        );
+      } else {
+        alunoParaSalvar.turma = undefined; // Ou undefined, dependendo do seu modelo.
+  
+        console.log("Objeto aluno antes de enviar para a API:", alunoParaSalvar);
+  
+        this.alunosService.atualizarAluno(id, alunoParaSalvar).subscribe( // Usa a variável local
+          (res: Aluno) => {
+            console.log('Aluno atualizado com sucesso', res);
+            this.modoEdicao = false;
+            this.voltar();
+          },
+          (err: any) => {
+            console.error('Erro ao salvar aluno', err);
+            console.error('Detalhes do erro:', err.error || err.message || err);
+          }
+        );
+      }
     }
   }
 

@@ -10,6 +10,7 @@
 h1 {
   font-size: 2rem;
   padding: 1rem;
+  padding-bottom: 0;
   width: 100%;
   text-align: center;
 }
@@ -85,7 +86,7 @@ button:active {
 
 form {
   background-color: var(--almost-white);
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
   width: 100%;
 }
 
@@ -109,7 +110,7 @@ form {
   margin-left: 1rem;
 }
 
-.dataCpf {
+.dataCpf, .dataCpfResponsavel {
   display: flex;
   flex-direction: row;
 

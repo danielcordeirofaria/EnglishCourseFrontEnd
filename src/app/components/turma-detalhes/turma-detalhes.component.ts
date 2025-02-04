@@ -139,7 +139,7 @@ export class TurmaDetalhesComponent implements OnInit {
   carregarNomeProfessor(idProfessor: number): void {
     this.professorService.buscarProfessorPorId(idProfessor).subscribe(
       (professor) => {
-        this.professores[idProfessor] = professor.nomeProfessor;
+        this.professores[idProfessor] = professor.nome;
       },
       (error) => {
         console.error('Erro ao carregar o nome do professor:', error);

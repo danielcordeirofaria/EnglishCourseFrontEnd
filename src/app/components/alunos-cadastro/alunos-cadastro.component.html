@@ -1,3 +1,5 @@
+<h1>Dados do Aluno</h1>
+
 <form [formGroup]="alunoForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="nome">Nome:</label>
@@ -11,7 +13,7 @@
     <div class="cepLogradouro">
       <div class="form-group cep">
         <label for="cep">CEP:</label>
-        <input id="cep" formControlName="cep" (blur)="buscarCep(alunoForm.get('endereco.cep')?.value)">
+        <input id="cep" formControlName="cep" (blur)="buscarCep(alunoForm.get('endereco.cep')?.value, 'endereco')"> 
         <div
           *ngIf="alunoForm.get('endereco.cep')?.invalid && (alunoForm.get('endereco.cep')?.dirty || alunoForm.get('endereco.cep')?.touched)">
           <small class="error-message" *ngIf="alunoForm.get('endereco.cep')?.errors?.['required']">CEP é
@@ -143,8 +145,8 @@
     <label for="nivel">Nível:</label>
     <select id="nivel" formControlName="nivel">
       <option value="">Selecione o nível</option>
-      <option value="beginers_1">Beginers 1</option>
-      <option value="beginers_2">Beginers 2</option>
+      <option value="beginners_1">Beginners 1</option>
+      <option value="beginners_2">Beginners 2</option>
       <option value="elementary_1">Elementary 1</option>
       <option value="elementary_2">Elementary 2</option>
       <option value="pre_intermediate_1">Pre Intermediate 1</option>
@@ -165,21 +167,34 @@
     </div>
   </div>
 
-  <button type="button" (click)="copiarDadosParaResponsavel()" [disabled]="!camposAlunoPreenchidos()">Copiar dados do
-    aluno para responsável</button>
+
+  <h1>Dados do Responsável</h1>
+  <!-- <button type="button" (click)="copiarDadosParaResponsavel()" [disabled]="!camposAlunoPreenchidos()">Copiar dados do
+    aluno para responsável</button> -->
 
   <div class="form-group">
     <label for="nomeResponsavel">Nome do Responsável:</label>
     <input type="text" id="nomeResponsavel" formControlName="nomeResponsavel">
   </div>
-  <div class="form-group">
-    <label for="dataDeNascimentoResponsavel">Data de Nascimento:</label>
-    <input type="date" id="dataDeNascimentoResponsavel" formControlName="dataDeNascimentoResponsavel">
+  <div class="dataCpfResponsavel">
+    <div class="form-group nascimento">
+      <label for="dataDeNascimentoResponsavel">Data de Nascimento:</label>
+      <input id="dataDeNascimentoResponsavel" type="date" formControlName="dataDeNascimentoResponsavel">
+      <div
+        *ngIf="alunoForm.get('dataDeNascimentoResponsavel')?.invalid && (alunoForm.get('dataDeNascimentoResponsavel')?.dirty || alunoForm.get('dataDeNascimento')?.touched)">
+        <small class="error-message" *ngIf="alunoForm.get('dataDeNascimentoResponsavel')?.errors?.['required']">Data de Nascimento
+          é obrigatória.</small>
+      </div>
+    </div>
+    <div class="form-group cpfResponsavel">
+      <label for="cpfResponsavel">CPF do Responsável:</label>
+      <input id="cpfResponsavel" formControlName="cpfResponsavel" appCpfFormat>
+      <div *ngIf="alunoForm.get('cpfResponsavel')?.invalid && (alunoForm.get('cpfResponsavel')?.dirty || alunoForm.get('cpfResponsavel')?.touched)">
+        <small class="error-message" *ngIf="alunoForm.get('cpfResponsavel')?.errors?.['required']">CPF é obrigatório.</small>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="cpfResponsavel">CPF do Responsável:</label>
-    <input type="text" id="cpfResponsavel" formControlName="cpfResponsavel">
-  </div>
+
   <div class="form-group">
     <label for="emailResponsavel">Email do Responsável:</label>
     <input type="email" id="emailResponsavel" formControlName="emailResponsavel">
@@ -208,35 +223,45 @@
     <input type="text" id="profissaoResponsavel" formControlName="profissaoResponsavel">
   </div>
 
-  <button type="button" (click)="copiarEnderecoParaResponsavel()" [disabled]="!camposAlunoPreenchidos()">Copiar endereço do aluno para responsável</button>
+  <!-- <button type="button" (click)="copiarEnderecoParaResponsavel()" [disabled]="!camposAlunoPreenchidos()">Copiar endereço do aluno para responsável</button> -->
 
-  <div class="form-group"> 
-    <label for="cepResponsavel">CEP:</label>
-    <input id="cepResponsavel" formControlName="cep">
-  </div>
-  <div class="form-group">
-    <label for="logradouroResponsavel">Logradouro:</label>
-    <input type="text" id="logradouroResponsavel" formControlName="logradouro">
-  </div>
-  <div class="form-group">
-    <label for="numeroResponsavel">Número:</label>
-    <input type="text" id="numeroResponsavel" formControlName="numero">
-  </div>
-  <div class="form-group">
-    <label for="complementoResponsavel">Complemento:</label>
-    <input type="text" id="complementoResponsavel" formControlName="complemento">
-  </div>
-  <div class="form-group">
-    <label for="bairroResponsavel">Bairro:</label>
-    <input type="text" id="bairroResponsavel" formControlName="bairro">
-  </div>
-  <div class="form-group">
-    <label for="cidadeResponsavel">Cidade:</label>
-    <input type="text" id="cidadeResponsavel" formControlName="cidade">
-  </div>
-  <div class="form-group">
-    <label for="estadoResponsavel">Estado:</label>
-    <input type="text" id="estadoResponsavel" formControlName="estado">
+  <div formGroupName="enderecoResponsavel" class="form-group endereco"> 
+    <div class="cepLogradouro">
+      <div class="form-group cep">
+        <label for="cepResponsavel">CEP:</label>
+        <input id="cepResponsavel" formControlName="cep" (blur)="buscarCep(alunoForm.get('enderecoResponsavel.cep')?.value, 'enderecoResponsavel')"> 
+        <div *ngIf="alunoForm.get('enderecoResponsavel.cep')?.invalid && (alunoForm.get('enderecoResponsavel.cep')?.dirty || alunoForm.get('enderecoResponsavel.cep')?.touched)">
+          <small class="error-message" *ngIf="alunoForm.get('enderecoResponsavel.cep')?.errors?.['required']">CEP é obrigatório.</small>
+          <small class="error-message" *ngIf="alunoForm.get('enderecoResponsavel.cep')?.errors?.['pattern']">CEP inválido.</small>
+        </div>
+      </div>
+      <div class="form-group logradouro">
+        <label for="logradouroResponsavel">Logradouro:</label>
+        <input id="logradouroResponsavel" formControlName="logradouro">
+      </div>
+    </div>
+    <div class="numeroComplemento">
+      <div class="form-group">
+        <label for="numeroResponsavel">Número:</label>
+        <input id="numeroResponsavel" formControlName="numero">
+      </div>
+      <div class="form-group complemento">
+        <label for="complementoResponsavel">Complemento:</label>
+        <input id="complementoResponsavel" formControlName="complemento">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="bairroResponsavel">Bairro:</label>
+      <input id="bairroResponsavel" formControlName="bairro">
+    </div>
+    <div class="form-group">
+      <label for="cidadeResponsavel">Cidade:</label>
+      <input id="cidadeResponsavel" formControlName="cidade">
+    </div>
+    <div class="form-group">
+      <label for="estadoResponsavel">Estado:</label>
+      <input id="estadoResponsavel" formControlName="estado">
+    </div>
   </div>
 
   <button type="submit" [disabled]="loading">Cadastrar</button>

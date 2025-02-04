@@ -2,7 +2,7 @@ import { Endereco } from './endereco';
 
 export class Professor {
   idProfessor?: any;
-  nomeProfessor: string;
+  nome: string;
   cpf: string;
   endereco: Endereco;
   email: string;
@@ -11,7 +11,7 @@ export class Professor {
   whatsapp: string;
 
   constructor(
-    nomeProfessor: string,
+    nome: string,
     cpf: string,
     endereco: Endereco,
     email: string,
@@ -21,7 +21,7 @@ export class Professor {
     idProfessor?: any
   ) {
     this.idProfessor = idProfessor;
-    this.nomeProfessor = nomeProfessor;
+    this.nome = nome;
     this.cpf = cpf;
     this.endereco = endereco;
     this.email = email;

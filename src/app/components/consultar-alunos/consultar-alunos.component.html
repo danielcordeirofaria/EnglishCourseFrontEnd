@@ -17,29 +17,28 @@
 
   <select [(ngModel)]="filterMonth" *ngIf="filterColumn === 'dataDeNascimento'" class="selectFiltro">
     <option value="">Todos os Meses</option>
-    <option value="01">Janeiro</option>
-    <option value="02">Fevereiro</option>
-    <option value="03">Março</option>
-    <option value="04">Abril</option>
-    <option value="05">Maio</option>
-    <option value="06">Junho</option>
-    <option value="07">Julho</option>
-    <option value="08">Agosto</option>
-    <option value="09">Setembro</option>
+    <option value="1">Janeiro</option>
+    <option value="2">Fevereiro</option>
+    <option value="3">Março</option>
+    <option value="4">Abril</option>
+    <option value="5">Maio</option>
+    <option value="6">Junho</option>
+    <option value="7">Julho</option>
+    <option value="8">Agosto</option>
+    <option value="9">Setembro</option>
     <option value="10">Outubro</option>
     <option value="11">Novembro</option>
     <option value="12">Dezembro</option>
   </select>
-  <input type="text" [(ngModel)]="filterValue" placeholder="Pesquisar alunos"
-    *ngIf="filterColumn !== 'dataDeNascimento' && filterColumn !== 'status'" class="selectFiltro">
 
-  <input type="number" [(ngModel)]="filterYear" placeholder="Ano de Nascimento"
-    *ngIf="filterColumn === 'dataDeNascimento'" class="selectFiltro">
+  <input type="text" [(ngModel)]="filterValue" placeholder="Pesquisar alunos" *ngIf="filterColumn !== 'dataDeNascimento' && filterColumn !== 'status'" class="selectFiltro">
+
+  <input type="number" [(ngModel)]="filterYear" placeholder="Ano de Nascimento" *ngIf="filterColumn === 'dataDeNascimento'" class="selectFiltro">
 
   <button (click)="filtrarAlunos()">Filtrar</button>
 </div>
 
-<div class="listaAlunos">
+<div class="listaAlunos" *ngIf="sortedAlunos.length > 0"> 
   <table class="table">
     <thead>
       <tr>
@@ -51,7 +50,7 @@
           <fa-icon *ngIf="sortColumn === 'idAlunoMatricula' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
           <fa-icon *ngIf="sortColumn === 'idAlunoMatricula' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
         </th>
-        <th class="th centralizandoTextoTabela" (click)="ordenandoLista('idade')">Idade
+        <th class="th centralizandoTextoTabela" (click)="ordenandoLista('idade')">Idade 
         </th>
         <th class="th centralizandoTextoTabela" (click)="ordenandoLista('dataDeNascimento')">Data de Nascimento
           <fa-icon *ngIf="sortColumn === 'dataDeNascimento' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
@@ -61,25 +60,24 @@
           <fa-icon *ngIf="sortColumn === 'nivel' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
           <fa-icon *ngIf="sortColumn === 'nivel' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
         </th>
-        <th class="th centralizandoTextoTabela" (click)="ordenandoLista('nivel')">Turma
-          <fa-icon *ngIf="sortColumn === 'nivel' && sortDirection === 'asc'" [icon]="faSortUp"></fa-icon>
-          <fa-icon *ngIf="sortColumn === 'nivel' && sortDirection === 'desc'" [icon]="faSortDown"></fa-icon>
+        <th class="th centralizandoTextoTabela">Turma 
         </th>
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let aluno of sortedAlunos; let i = index">
-        <tr [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela"
-          [routerLink]="['/alunos-detalhes', aluno.idAlunoMatricula]" style="cursor: pointer;">
+      <tr *ngFor="let aluno of sortedAlunos; let i = index"
+          [ngClass]="{'row-even': i % 2 === 0, 'row-odd': i % 2 !== 0}" class="linha-tabela"
+          [routerLink]="['/aluno-detalhes', aluno.idAlunoMatricula]" style="cursor: pointer;">
+          
           <td class="td">{{ aluno.nome }}</td>
           <td class="td centralizandoTextoTabela">{{ aluno.idAlunoMatricula }}</td>
-          <td class="td centralizandoTextoTabela">{{ calcularIdade(aluno.dataDeNascimento) }}</td>  
+          <td class="td centralizandoTextoTabela">{{ calcularIdade(aluno.dataDeNascimento) }}</td>
           <td class="td centralizandoTextoTabela">{{ aluno.dataDeNascimento | date:'dd/MM/yyyy' }}</td>
           <td class="td centralizandoTextoTabela">{{ aluno.nivel }}</td>
-          <td class="td centralizandoTextoTabela">{{ aluno.turma.idTurma !== undefined ? retornarNomeDaTurma(aluno.turma.idTurma) : 'Turma não definida' }}</td>        
-        
-        </tr>
-      </ng-container>
+          <td class="td centralizandoTextoTabela">
+            {{ aluno.turma?.idTurma ? retornarNomeDaTurma(aluno.turma?.idTurma) : 'Turma não definida' }}
+          </td>
+      </tr>
     </tbody>
   </table>
 </div>

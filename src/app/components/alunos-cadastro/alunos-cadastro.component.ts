@@ -73,7 +73,7 @@ export class AlunosCadastroComponent implements OnInit {
       nome: ['', Validators.required],
       endereco: this.fb.group({
         logradouro: ['', Validators.required],
-        numero: ['', Validators.required],
+        numero: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]], // Validação para números
         complemento: [''],
         bairro: ['', Validators.required],
         cidade: ['', Validators.required],
@@ -117,9 +117,15 @@ export class AlunosCadastroComponent implements OnInit {
       this.alunoForm.get('email')?.valid;
   }
 
-  buscarCep(cep: string) {
+  buscarCep(cep: string, formGroup: string) { 
     this.cepService.buscarCep(cep).subscribe(
-      data => this.populateEndereco(data),
+      data => {
+        if (formGroup === 'endereco') {
+          this.populateEndereco(data); 
+        } else if (formGroup === 'enderecoResponsavel') {
+          this.populateEnderecoResponsavel(data); 
+        }
+      },
       error => console.error('Erro ao buscar CEP:', error)
     );
   }
@@ -162,26 +168,28 @@ export class AlunosCadastroComponent implements OnInit {
       this.loading = true;
       const formValue = this.alunoForm.value;
 
+      console.log(formValue.endereco)
+
       // Criar o endereço do aluno
       const enderecoAluno = new Endereco(
         formValue.endereco.logradouro,
         formValue.endereco.numero,
-        formValue.endereco.complemento,
         formValue.endereco.bairro,
         formValue.endereco.cidade,
         formValue.endereco.estado,
-        formValue.endereco.cep
-      );
+        formValue.endereco.cep,
+        formValue.endereco.complemento
+    );
 
       // Criar o endereço do responsável
       const enderecoResponsavel = new Endereco(
         formValue.enderecoResponsavel.logradouro,
         formValue.enderecoResponsavel.numero,
-        formValue.enderecoResponsavel.complemento,
         formValue.enderecoResponsavel.bairro,
         formValue.enderecoResponsavel.cidade,
         formValue.enderecoResponsavel.estado,
-        formValue.enderecoResponsavel.cep
+        formValue.enderecoResponsavel.cep,
+        formValue.enderecoResponsavel.complemento
       );
 
       // Criar o responsável
@@ -209,8 +217,8 @@ export class AlunosCadastroComponent implements OnInit {
         formValue.moduloFeito,
         formValue.nivel,
         formValue.status,
+        responsavel,
         formValue.idTurma,
-        responsavel
       );
 
       // Chamar o serviço para cadastrar o aluno
@@ -255,7 +263,7 @@ export class AlunosCadastroComponent implements OnInit {
     const enderecoAluno = this.alunoForm.get('endereco')?.value;
 
     console.log(enderecoAluno)
-  
+
     this.alunoForm.get('enderecoResponsavel')?.patchValue({
       cep: enderecoAluno.cep,
       logradouro: enderecoAluno.logradouro,

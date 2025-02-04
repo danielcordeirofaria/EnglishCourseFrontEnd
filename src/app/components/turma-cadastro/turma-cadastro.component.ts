@@ -46,13 +46,15 @@ export class TurmaComponent implements OnInit {
 
   onSubmit() {
     if (this.turmaForm.valid) {
+      console.log(this.turmaForm)
       this.loading = true;
   
       const turmaData: Turma = {
         nomeTurma: this.turmaForm.get('nomeTurma')?.value,
         professor: {
-          idProfessor: this.turmaForm.get('professor')?.value  // Somente o id do professor
-        }
+          idProfessor: this.turmaForm.get('professor')?.value // Somente o id do professor
+        },
+        idTurma: undefined
       };
   
       this.turmaService.createTurma(turmaData).subscribe(

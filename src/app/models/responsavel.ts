@@ -3,7 +3,7 @@ import { Endereco } from "./endereco";
 
 export class Responsavel {
 
-    idResponsavel!: any | string;
+    idResponsavel: any;
     nome: string;
     endereco: Endereco;
     dataDeNascimento: string;

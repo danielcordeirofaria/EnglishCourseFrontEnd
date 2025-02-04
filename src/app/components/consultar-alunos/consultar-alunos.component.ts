@@ -12,16 +12,14 @@ import { TurmaService } from '../../services/turma.service';
 })
 export class ConsultarAlunosComponent implements OnInit {
   alunos: Aluno[] = [];
-  alunoSelecionado: Aluno | undefined;
-  router: any;
   sortedAlunos: Aluno[] = [];
   sortDirection: string = 'asc';
   sortColumn: string = 'nome';
-  filterColumn: 'status' | 'nome' | 'idAlunoMatricula' | 'nivel' | 'dataDeNascimento' = 'status'; // Coluna padrão para filtro
-  filterValue: any = ''; // Valor de filtro
-  filterMonth: string = ''; // Mês de nascimento para filtro
-  filterYear: number | '' = ''; // Ano de nascimento para filtro
-  filterStatus: string = ''; // Status do filtro
+  filterColumn: 'status' | 'nome' | 'idAlunoMatricula' | 'nivel' | 'dataDeNascimento' = 'status'; 
+  filterValue: any = ''; 
+  filterMonth: string = ''; 
+  filterYear: number | '' = ''; 
+  filterStatus: string = ''; 
   faSortUp = faSortUp;
   faSortDown = faSortDown;
   turma: Turma[] = [];
@@ -33,31 +31,29 @@ export class ConsultarAlunosComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarAlunos();
-    this.carregarTurmas(); // Adicione esta linha para carregar as turmas
-
+    this.carregarTurmas(); 
   }
 
-  // Carregar turmas de uma fonte de dados
-carregarTurmas(): void {
-  // Supondo que você tenha um serviço que busca as turmas
-  this.turmaService.listarTurmas()
-    .subscribe(
-      (turmas: Turma[]) => {
-        this.turma = turmas;
-      },
-      (error: any) => {
-        console.error('Erro ao buscar turmas', error);
-      }
-    );
-}
+  carregarTurmas(): void {
+    this.turmaService.listarTurmas()
+      .subscribe(
+        (turmas: Turma[]) => {
+          this.turma = turmas;
+        },
+        (error: any) => {
+          console.error('Erro ao buscar turmas', error);
+        }
+      );
+  }
 
   buscarAlunos(): void {
     this.alunosService.listarAlunos()
       .subscribe(
         (alunos: Aluno[]) => {
           this.alunos = alunos;
-          this.sortedAlunos = [...alunos];
-
+          this.sortedAlunos = [...alunos]; // Inicializa sortedAlunos aqui
+          console.log('Alunos:', this.alunos);
+          console.log('Sorted Alunos:', this.sortedAlunos); 
         },
         (error: any) => {
           console.error('Erro ao buscar alunos', error);
@@ -130,11 +126,4 @@ carregarTurmas(): void {
     const turmaEncontrada = this.turma.find((t) => t.idTurma === idTurma);
     return turmaEncontrada ? turmaEncontrada.nomeTurma : 'Turma não encontrada';
   }
-  
-
-
-
-
 }
-
-

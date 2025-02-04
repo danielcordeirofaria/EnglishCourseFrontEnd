@@ -1,8 +1,9 @@
 import { Endereco } from './endereco';
 import { Responsavel } from './responsavel';
-import { Turma } from './turma'; // Certifique-se de importar a classe correta
+import { Turma } from './turma';
 
 export class Aluno {
+
   idAlunoMatricula!: any | string;
   nome: string;
   endereco: Endereco;
@@ -15,8 +16,8 @@ export class Aluno {
   moduloFeito: string;
   nivel: string;
   status: string;
-  turma: Turma; 
-  responsavel: any | Responsavel;
+  turma: Turma | undefined;
+  responsavel: Responsavel;
 
   constructor(
     nome: string,
@@ -30,8 +31,8 @@ export class Aluno {
     moduloFeito: string,
     nivel: string,
     status: string,
-    turma: Turma,
-    responsavel?: Responsavel | null // Parâmetro opcional
+    responsavel: Responsavel,
+    turma?: Turma
   ) {
     this.nome = nome;
     this.endereco = endereco;
