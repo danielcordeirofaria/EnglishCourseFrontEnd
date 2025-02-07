@@ -19,10 +19,10 @@ import { ProfessorDetalhesComponent } from './components/professor-detalhes/prof
 import { TurmaComponent } from './components/turma-cadastro/turma-cadastro.component';
 import { ConsultarTurmasComponent } from './components/consultar-turmas/consultar-turmas.component';
 import { TurmaDetalhesComponent } from './components/turma-detalhes/turma-detalhes.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({ declarations: [
-        AppComponent,
         AppComponent,
         HeaderComponent,
         MainComponent,
@@ -37,13 +37,14 @@ import { TurmaDetalhesComponent } from './components/turma-detalhes/turma-detalh
         TurmaComponent,
         ConsultarTurmasComponent,
         TurmaDetalhesComponent,
-        ],
+        LoginComponent
+    ],
     bootstrap: [AppComponent],
-    imports: [BrowserModule,
+    imports: [
+        BrowserModule,
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
         FontAwesomeModule,
-        ReactiveFormsModule,
         CommonModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
         export class AppModule { }

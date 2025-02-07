@@ -1,0 +1,28 @@
+<form #loginForm="ngForm" class="form"  novalidate>
+    <fieldset>
+        <legend class="legend">Entrar</legend>
+        <label class="formLogin" for="login">Login:
+            <input type="text" id="login" name="login" [required]="true" minlength="6" [(ngModel)]="login.login"
+                #loginCtrl="ngModel">
+            <div *ngIf="loginCtrl.invalid && (loginCtrl.dirty || loginCtrl.touched)"
+                class="error-message">
+                <span *ngIf="loginCtrl.invalid">Por favor, insira seu login.</span>
+                <span *ngIf="loginCtrl.invalid">O login deve ter pelo menos 6 caracteres.</span>
+            </div>
+        </label>
+        
+        <label class="formLogin" for="senhaLogin">Senha:
+            <input type="password" id="senhaLogin" name="senhaLogin" required minlength="6" [(ngModel)]="login.password"
+                #senhaLoginCtrl="ngModel">
+            <div *ngIf="senhaLoginCtrl.invalid && (senhaLoginCtrl.dirty || senhaLoginCtrl.touched)"
+                class="error-message">
+                Digite uma senha com pelo menos 6 dígitos.
+            </div>
+        </label>
+    </fieldset>
+    <div class="buttonSubmit">
+        <button (click)="logar()" class="submitBtn">Enviar</button>
+    </div>
+            <span *ngIf="mensagem != ''" class="error-message">{{mensagem}}</span>
+
+</form>

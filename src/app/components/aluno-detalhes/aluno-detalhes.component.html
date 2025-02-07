@@ -6,6 +6,7 @@
       <p><strong>Nome:</strong> {{ aluno.nome }}</p>
       <p><strong>CPF:</strong> {{ aluno.cpf }}</p>
       <p><strong>Email:</strong> {{ aluno.email }}</p>
+      <p><strong>Whatsapp: </strong>{{ aluno.whatsapp}}</p>
 
       <p><strong>Endereço:</strong></p>
       <div class="endereco">
@@ -33,6 +34,7 @@
       <p><strong>Nome:</strong> {{ aluno.responsavel.nome }}</p>
       <p><strong>CPF:</strong> {{ aluno.responsavel.cpf }}</p>
       <p><strong>Email:</strong> {{ aluno.responsavel.email }}</p>
+      <p><strong>Whatsapp: </strong> {{ aluno.responsavel.whatsapp }}</p>
 
       <p><strong>Endereço:</strong></p>
       <div class="endereco">
@@ -77,6 +79,14 @@
         <input [(ngModel)]="aluno.email" name="email" required />
         <div *ngIf="!aluno.email">
           <small class="error-message">Email é obrigatório.</small>
+        </div>
+      </label>
+
+      <label>
+        Whatsapp: 
+        <input [(ngModel)]="aluno.whatsapp" name="whatsapp" required />
+        <div *ngIf="!aluno.whatsapp">
+          <small class="error-message">whatsapp é obrigatório.</small>
         </div>
       </label>
 
@@ -259,6 +269,14 @@
         <input [(ngModel)]="aluno.responsavel.email" name="responsavelEmail" required />
         <div *ngIf="!aluno.responsavel.email">
           <small class="error-message">Email do responsável é obrigatório.</small>
+        </div>
+      </label>
+
+      <label>
+        Whatsapp:
+        <input [(ngModel)]="aluno.responsavel.whatsapp" name="responsavelwhatsapp" required />
+        <div *ngIf="!aluno.responsavel.whatsapp">
+          <small class="error-message">Whatsapp do responsável é obrigatório.</small>
         </div>
       </label>
 

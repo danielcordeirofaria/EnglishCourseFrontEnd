@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  deslogar() {
+throw new Error('Method not implemented.');
+}
   isLogoActive: boolean = true; // Inicializa como true quando o componente é inicializado
 
   constructor() { }
