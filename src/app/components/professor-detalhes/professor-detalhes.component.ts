@@ -89,4 +89,16 @@ export class ProfessorDetalhesComponent implements OnInit {
     this.modoEdicao = false;
     this.professor = this.professorOriginal;
   }
+
+  getWhatsAppLink(whatsappNumber: string): string {
+    // Remove todos os caracteres não numéricos
+    const cleanedNumber = whatsappNumber.replace(/\D/g, '');
+  
+    // Adiciona o código do país (55 para Brasil) se não estiver presente
+    if (!cleanedNumber.startsWith('55')) {
+      return '55' + cleanedNumber;
+    }
+  
+    return cleanedNumber;
+  }
 }

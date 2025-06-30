@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +11,17 @@ export class HeaderComponent {
 
   isAdmin: boolean = false;
   isTokenValid: boolean = false;
+  existePrimeiroUsuario: boolean | undefined;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private loginService: LoginService // Injete o LoginService corretamente
+  ) { }
 
   ngOnInit(): void {
     this.checkAdminStatus();
     this.verificarToken();
+    this.verificarPrimeiroUsuario(); // Chame o método ao inicializar o componente
   }
 
   checkAdminStatus() {
@@ -43,7 +49,22 @@ export class HeaderComponent {
     this.isTokenValid = false;
     this.router.navigateByUrl('/');
     location.reload();
-
   }
 
+  verificarPrimeiroUsuario() {
+    console.log("Verificando se tem usuário cadastrado");
+    this.loginService.verificarPrimeiroUsuario().subscribe(
+      (existeProfessor: boolean) => {
+        this.existePrimeiroUsuario = existeProfessor; // Armazene o resultado
+        if (!existeProfessor) {
+          // Se não houver nenhum professor cadastrado, redirecione para a página de cadastro de professor
+          this.router.navigateByUrl('/cadastro-primeiro-professor');
+        }
+      },
+      (error: any) => {
+        console.error('Erro ao verificar o primeiro usuário:', error);
+        this.existePrimeiroUsuario = false; // Em caso de erro, defina como false
+      }
+    );
+  }
 }

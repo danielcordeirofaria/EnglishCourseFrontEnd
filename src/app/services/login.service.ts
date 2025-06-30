@@ -17,4 +17,9 @@ export class LoginService {
 
     return this.http.post<professorToken>(this.apiUrl + "auth/login", login);
   }
+
+  public verificarPrimeiroUsuario(): Observable<boolean>{
+    return this.http.get<boolean>(this.apiUrl + "auth/verificacaoPrimeiroUsuario")
+  }
+
 }

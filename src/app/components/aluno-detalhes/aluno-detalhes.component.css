@@ -95,6 +95,8 @@ input[type="date"] {
     background-color: var(--yellow);
     /* Cor de fundo ao passar o mouse */
     transform: scale(1.05);
+    color: button-editar;
+
     /* Leve aumento do botão ao passar o mouse */
 }
 
@@ -105,6 +107,7 @@ input[type="date"] {
     outline: none;
     /* Remove a borda de foco padrão */
     box-shadow: 0 0 0 2px var(--yellow);
+    color: button-editar;
     /* Adiciona uma sombra de foco para acessibilidade */
 }
 
@@ -151,4 +154,13 @@ button {
 #formacao, #nivel, #moduloFeito, #status, #idTurma{
     display: flex;
     flex-direction: column;
+}
+
+.whatsapp-link{
+    color: blue; /* Cor do link */
+}
+
+.whatsapp-link:hover {
+    color: red;
+    
 }

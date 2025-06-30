@@ -24,7 +24,8 @@ const routes: Routes = [
   { path: 'turma-cadastro', component: TurmaComponent},
   { path: 'consultar-turmas', component: ConsultarTurmasComponent},
   { path: 'turma-detalhes/:id', component: TurmaDetalhesComponent},
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'cadastro-primeiro-professor', component: CadastrarProfessorComponent }
 
   
   // Adicione outras rotas conforme necessário

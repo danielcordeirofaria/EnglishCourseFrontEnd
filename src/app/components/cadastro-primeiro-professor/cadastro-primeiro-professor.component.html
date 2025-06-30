@@ -1,0 +1,114 @@
+<h1>Cadastro do Primeiro Usuário</h1>
+<form [formGroup]="professorForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="nomeProfessor">Nome:</label>
+    <input id="nomeProfessor" formControlName="nomeProfessor">
+    <div *ngIf="professorForm.get('nomeProfessor')?.invalid && (professorForm.get('nomeProfessor')?.dirty || professorForm.get('nomeProfessor')?.touched)">
+      <small class="error-message" *ngIf="professorForm.get('nomeProfessor')?.errors?.['required']">Nome é obrigatório.</small>
+    </div>
+  </div>
+
+  <div formGroupName="endereco" class="form-group endereco">
+    <div class="cepLogradouro">
+      <div class="form-group cep">
+        <label for="cep">CEP:</label>
+        <input id="cep" formControlName="cep" (blur)="buscarCep(professorForm.get('endereco.cep')?.value)">
+        <div *ngIf="professorForm.get('endereco.cep')?.invalid && (professorForm.get('endereco.cep')?.dirty || professorForm.get('endereco.cep')?.touched)">
+          <small class="error-message" *ngIf="professorForm.get('endereco.cep')?.errors?.['required']">CEP é obrigatório.</small>
+          <small class="error-message" *ngIf="professorForm.get('endereco.cep')?.errors?.['pattern']">CEP inválido.</small>
+        </div>
+      </div>
+      <div class="form-group logradouro">
+        <label for="logradouro">Logradouro:</label>
+        <input id="logradouro" formControlName="logradouro">
+        <div *ngIf="professorForm.get('endereco.logradouro')?.invalid && (professorForm.get('endereco.logradouro')?.dirty || professorForm.get('endereco.logradouro')?.touched)">
+          <small class="error-message" *ngIf="professorForm.get('endereco.logradouro')?.errors?.['required']">Logradouro é obrigatório.</small>
+        </div>
+      </div>
+    </div>
+    <div class="numeroComplemento">
+      <div class="form-group">
+        <label for="numero">Número:</label>
+        <input id="numero" formControlName="numero">
+        <div *ngIf="professorForm.get('endereco.numero')?.invalid && (professorForm.get('endereco.numero')?.dirty || professorForm.get('endereco.numero')?.touched)">
+          <small class="error-message" *ngIf="professorForm.get('endereco.numero')?.errors?.['required']">Número é obrigatório.</small>
+        </div>
+      </div>
+
+      <div class="form-group complemento">
+        <label for="complemento">Complemento:</label>
+        <input id="complemento" formControlName="complemento">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="bairro">Bairro:</label>
+      <input id="bairro" formControlName="bairro">
+      <div *ngIf="professorForm.get('endereco.bairro')?.invalid && (professorForm.get('endereco.bairro')?.dirty || professorForm.get('endereco.bairro')?.touched)">
+        <small class="error-message" *ngIf="professorForm.get('endereco.bairro')?.errors?.['required']">Bairro é obrigatório.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cidade">Cidade:</label>
+      <input id="cidade" formControlName="cidade">
+      <div *ngIf="professorForm.get('endereco.cidade')?.invalid && (professorForm.get('endereco.cidade')?.dirty || professorForm.get('endereco.cidade')?.touched)">
+        <small class="error-message" *ngIf="professorForm.get('endereco.cidade')?.errors?.['required']">Cidade é obrigatória.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="estado">Estado:</label>
+      <input id="estado" formControlName="estado">
+      <div *ngIf="professorForm.get('endereco.estado')?.invalid && (professorForm.get('endereco.estado')?.dirty || professorForm.get('endereco.estado')?.touched)">
+        <small class="error-message" *ngIf="professorForm.get('endereco.estado')?.errors?.['required']">Estado é obrigatório.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="cpf">CPF:</label>
+    <input id="cpf" formControlName="cpf" appCpfFormat>
+    <div *ngIf="professorForm.get('cpf')?.invalid && (professorForm.get('cpf')?.dirty || professorForm.get('cpf')?.touched)">
+      <small class="error-message" *ngIf="professorForm.get('cpf')?.errors?.['required']">CPF é obrigatório.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email">
+    <div *ngIf="professorForm.get('email')?.invalid && (professorForm.get('email')?.dirty || professorForm.get('email')?.touched)">
+      <small class="error-message" *ngIf="professorForm.get('email')?.errors?.['required']">Email é obrigatório.</small>
+      <small class="error-message" *ngIf="professorForm.get('email')?.errors?.['email']">Formato de email inválido.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="login">Login:</label>
+    <input id="login" formControlName="login">
+    <div *ngIf="professorForm.get('login')?.invalid && (professorForm.get('login')?.dirty || professorForm.get('login')?.touched)">
+      <small class="error-message" *ngIf="professorForm.get('login')?.errors?.['required']">Login é obrigatório.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Senha:</label>
+    <input id="password" formControlName="password" type="password">
+    <div *ngIf="professorForm.get('password')?.invalid && (professorForm.get('password')?.dirty || professorForm.get('password')?.touched)">
+      <small class="error-message" *ngIf="professorForm.get('password')?.errors?.['required']">Senha é obrigatória.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="whatsapp">WhatsApp:</label>
+    <input id="whatsapp" formControlName="whatsapp">
+    <div *ngIf="professorForm.get('whatsapp')?.invalid && (professorForm.get('whatsapp')?.dirty || professorForm.get('whatsapp')?.touched)">
+      <small class="error-message" *ngIf="professorForm.get('whatsapp')?.errors?.['pattern']">WhatsApp inválido.</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="loading">Cadastrar</button>
+</form>
+
+<div *ngIf="loading" class="loading-spinner">
+  Carregando...
+</div>

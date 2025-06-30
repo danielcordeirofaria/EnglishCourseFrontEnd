@@ -10,6 +10,10 @@ export class ProfessorService {
 
   private apiUrl = 'http://localhost:8080/professores';
 
+  cadastrandoPrimeiroUsuario(professor: Professor): Observable<Professor> {
+    return this.http.post<Professor>(`${this.apiUrl}/primeiro-professor`, professor);
+  }
+
   constructor(private http: HttpClient) { }
 
   listarProfessores(): Observable<Professor[]> {

@@ -20,6 +20,7 @@ import { TurmaComponent } from './components/turma-cadastro/turma-cadastro.compo
 import { ConsultarTurmasComponent } from './components/consultar-turmas/consultar-turmas.component';
 import { TurmaDetalhesComponent } from './components/turma-detalhes/turma-detalhes.component';
 import { LoginComponent } from './components/login/login.component';
+import { CadastroPrimeiroProfessorComponent } from './components/cadastro-primeiro-professor/cadastro-primeiro-professor.component';
 
 
 @NgModule({ declarations: [
@@ -37,7 +38,8 @@ import { LoginComponent } from './components/login/login.component';
         TurmaComponent,
         ConsultarTurmasComponent,
         TurmaDetalhesComponent,
-        LoginComponent
+        LoginComponent,
+        CadastroPrimeiroProfessorComponent
     ],
     bootstrap: [AppComponent],
     imports: [

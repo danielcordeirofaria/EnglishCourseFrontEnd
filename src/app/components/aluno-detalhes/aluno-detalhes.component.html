@@ -6,8 +6,13 @@
       <p><strong>Nome:</strong> {{ aluno.nome }}</p>
       <p><strong>CPF:</strong> {{ aluno.cpf }}</p>
       <p><strong>Email:</strong> {{ aluno.email }}</p>
-      <p><strong>Whatsapp: </strong>{{ aluno.whatsapp}}</p>
-
+      <p>
+        <strong>Whatsapp: </strong>
+        <a [href]="'https://wa.me/' + aluno.whatsapp" class="whatsapp-link">
+          {{ aluno.whatsapp }}
+        </a>
+      </p>
+      
       <p><strong>Endereço:</strong></p>
       <div class="endereco">
         <p><strong>Logradouro:</strong> {{ aluno.endereco.logradouro }}</p>
@@ -34,7 +39,13 @@
       <p><strong>Nome:</strong> {{ aluno.responsavel.nome }}</p>
       <p><strong>CPF:</strong> {{ aluno.responsavel.cpf }}</p>
       <p><strong>Email:</strong> {{ aluno.responsavel.email }}</p>
-      <p><strong>Whatsapp: </strong> {{ aluno.responsavel.whatsapp }}</p>
+      <p>
+        <strong>Whatsapp: </strong>
+        <a [href]="'https://wa.me/' + aluno.responsavel.whatsapp" class="whatsapp-link">
+          {{ aluno.whatsapp }}
+        </a>
+      </p>
+
 
       <p><strong>Endereço:</strong></p>
       <div class="endereco">

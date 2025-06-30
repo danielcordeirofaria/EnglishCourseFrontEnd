@@ -100,3 +100,12 @@ input {
     font-size: 14px;
     color: var(--red);
 }
+
+.whatsapp-link{
+    color: blue; /* Cor do link */
+}
+
+.whatsapp-link:hover {
+    color: red;
+    
+}
